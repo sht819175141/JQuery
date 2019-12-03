@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		li{list-style: none;line-height: 30px;}
+		.box{
+			width: 275px;
+			margin: 0 auto;
+		}
+		#ula{height: 300px;border: 1px solid #ccc;width: 100px; float: left;}
+		#ulb{height: 300px;border: 1px solid #ccc;width: 100px; float: right;}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.min.js"></script>
+	<div class="box">
+
+		<ul id="ula">
+			<li><input type="checkbox" value="1"/>消灭星星</li>
+			<li><input type="checkbox" value="2"/>青花瓷</li>
+			<li><input type="checkbox" value="3"/>发如雪</li>
+			<li><input type="checkbox" value="4"/>两只老虎</li>
+			<li><input type="checkbox" value="5"/>颤栗</li>
+			<li><input type="checkbox" value="6"/>小酒窝</li>
+			<li><input type="checkbox" value="7"/>悟空</li>
+			<li><input type="checkbox" value="8"/>演员</li>
+			<li><input type="checkbox" value="9"/>绅士</li>
+			<li><input type="checkbox" value="10"/>烟花易冷</li>
+		</ul>
+
+		<button id="btn1">添加</button>
+		<button id="btn2">删除</button>
+		<ul id="ulb">
+
+		</ul>
+
+	</div>
+	<script>
+	$(document).ready(function(){
+		//添加
+		var arr=[];
+		var brr=[];
+		$("#btn1").on("click",function(){
+			var check=$("#ula").find(":checked");
+			if(check.length==0) return false;
+			//$("#ulb").html("");
+			$(check).each(function(){
+				var vall=$(this).val();
+				var txt=$(this).parent().text();
+
+				if($.inArray(vall,arr)==-1){
+					arr.push(vall);
+					var yli="<li><input type='checkbox' value="+vall+">"+txt+"</li>"
+					$("#ulb").append(yli)
+					
+				}else{
+					brr.push(vall);
+				}
+			})
+			$("#ulb").append("<li></li>");
+		})
+
+		//删除
+		$("#btn2").on("click",function(){
+			var dele=$("#ulb").find(":checked");
+			if(dele.length==0) return false;
+			$(dele).each(function(){
+				var dech=$(this).val();
+				$(this).parent().remove();
+				arr.splice($.inArray(dech,arr),1)
+			})
+		})
+	})
+	</script>
+</body>
+</html>

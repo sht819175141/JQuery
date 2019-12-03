@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+  		 *{
+  			margin:0;
+  			padding: 0;
+  			list-style: none;
+  		}
+  	li.libg{
+  			background: #cecece!important;
+  		}
+  	</style>
+</head>
+
+<body>
+    <div class="wrap">
+        <input type="text" class="cd">
+        <ul class="like_list">
+            <li>111111111111111111111</li>
+            <li>222222222222222222222</li>
+            <li>333333333333333333333</li>
+        </ul>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script>
+        $(".cd").on("keyup", function() {
+            var len = $(this).next().children().length;
+            $(this).next().children().eq(count).addClass("libg").siblings().removeClass("libg")
+
+            $(this).val($(this).next().children().find(".libg").text());
+
+        })
+    </script>
+</body>
+
+</html>

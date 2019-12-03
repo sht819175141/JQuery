@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+<h3>Try entering something...</h3>
+
+<input/>
+
+<p class="normal">Normal input:
+    <span class="text"></span>
+</p>
+<p class="debounced">Debounced input:
+    <span class="text"></span>
+</p>
+
+<script src="jquery-3.1.1.min.js"></script>
+<script>
+    $('input').on('keyup', function (e) {
+        $('.normal .text').text(this.value)
+    })
+
+    $('input').on('keyup',
+        debounce(function (e) {
+            $('.debounced .text').text(this.value)
+        }, 3000)
+    )
+
+    $(document).on('mouvemove',
+        debounce(function (e) {
+                alert("1111111111")
+            },
+            250)
+    )
+
+    function debounce(fn, delay) {
+        var timer = null
+        return function () {
+            var context = this
+            var args = arguments
+            clearTimeout(timer)
+            timer = setTimeout(function () {
+                fn.apply(context, args)
+            }, delay)
+        }
+    }
+</script>
+</body>
+
+</html>

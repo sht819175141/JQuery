@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0; padding: 0}
+		#box{ position: relative; margin:0 auto;}
+		#box img{position:absolute;right: 0}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<img src="imgs/temp_img01.jpg" alt="">
+		<img src="imgs/temp_img02.jpg" alt="">	
+		<img src="imgs/temp_img03.jpg" alt="">
+		<img src="imgs/temp_img04.jpg" alt="">
+		<img src="imgs/temp_img05.jpg" alt="">
+		<img src="imgs/temp_img06.jpg" alt="">
+		<img src="imgs/temp_img07.jpg" alt="">
+		<img src="imgs/temp_img08.jpg" alt="">
+		<img src="imgs/temp_img09.jpg" alt="">
+		<img src="imgs/temp_img10.jpg" alt="">
+		<img src="imgs/temp_img11.jpg" alt="">
+		<img src="imgs/temp_img12.jpg" alt="">
+		<img src="imgs/temp_img13.jpg" alt=""> 
+	</div>
+	<script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+	<script>
+		$(document).ready(function(){
+			var imgw=$("#box img").width()+20;
+			var sum=Math.floor($(window).width()/imgw);
+			$("#box").width(imgw*sum)
+			var arrH=[];
+			var p=0;
+			function inc(str,len){
+				for(var i=str;i<len;i++){
+					if(i<sum){
+						arrH.push(0)
+					}
+					var min=Math.min.apply(Math,arrH);
+					var mindex=$.inArray(min,arrH);
+					var gao=$("#box img").eq(i).height()+20;
+					arrH[mindex]+=gao;
+					$("#box img").eq(i).stop().animate({"left":mindex*imgw,"top":min},3000)
+					p++;
+				}
+			}
+			inc(0,$("#box img").length)
+					
+			$(window).on("scroll",function(){
+				var scroll=$(document).height()-$(this).height();
+				if($(window).scrollTop()>=scroll){
+					$.ajax({
+						method:"get",
+						url:"data.json",
+						async:true,
+						datatype:"json",
+						success:function(data){
+							for(i in data){
+								inc(p,$("#box img").length);
+								var minH=Math.min.apply(Math,arrH);
+								var minind=$.inArray(minH,arrH);
+								$("<img>").attr("src",data[i].src).css({'left':minind*imgw,'top':minH}).appendTo($("#box"))
+							}				
+						}	
+					})
+				}
+			})
+		})
+	</script>
+</body>
+</html>

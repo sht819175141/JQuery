@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">第定位</button>
+	<div id="demo"></div>
+	<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+	<script>
+		var x=document.getElementById("demo");
+		var btn=document.getElementById("btn");
+		btn.onclick=function getLocation(){
+		  	if (navigator.geolocation){
+			    navigator.geolocation.getCurrentPosition(showPosition);
+			}else{
+				x.innerHTML="Geolocation is not supported by this browser.";
+			}
+		}
+		function showPosition(position){
+			x.innerHTML="Latitude: " + position.coords.latitude + "<br />Longitude: " + position.coords.longitude;
+		}
+	</script>
+</body>
+</html>

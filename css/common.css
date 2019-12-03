@@ -1,0 +1,136 @@
+@charset "utf-8";
+
+/*-----------------------------------------初始化样式------------------------------------------*/
+body,html{ padding:0; margin:0 auto; font-family:"微软雅黑"; font-size:14px; }
+body{ background:url(../images/index-bg.jpg) repeat; color:#000}
+img{ border:none;}
+h1,h2,h3,h4,h5,h6,hr,blockquote,form,ul,ol,li,p,pre,dl,dt,dd,fieldset,legend,button,input,textarea,th,td{ padding:0; margin:0;}
+h1,h2,h3,h4,h5,h6{ font-weight:normal}
+ul,ol, li{ list-style:none;}
+legend { color:#000;}
+fieldset{ border:0;} 
+button,input,select,textarea { font-size:100%; outline: none; vertical-align:middle} 
+button{cursor:pointer;}
+table{ border-collapse:collapse; border-spacing:0;}
+.clearfix:after {
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+.clearfix {display: inline-table;}
+* html .clearfix {height: 1%; }
+.clearfix {display: block;}
+a {outline: none; text-decoration:none; color:#000;}
+a:hover,a:active {text-decoration:underline;}
+a.orange,a.orange:hover{color:#db8f2f}
+a.green,a.green:hover{color:#00aba3}
+
+.left{ float:left; _display:inline;}
+.right{ float:right;}
+.wid1192{ width:1192px; margin:0px auto;}
+
+
+/*------------------------------------------字体样式-------------------------------------------*/
+body,button,input,select,textarea{ font-size:12px; font-family:"微软雅黑"; }
+button{ border:none}
+h1,h2,h3,h4,h5,h6{ font-size:100%;}
+address,cite,dfn,em,i,var{ font-style:normal }
+code,kbd,pre,samp{ font-family:courier new, courier, monospace;}
+.font-family{ font-family:"宋体"}
+b{ font-weight:normal}
+small{ font-size:12px;}
+.bold{ font-weight:bold;}
+.orange{ color:#db8f2f}
+.pale{ color:#dc8f30}
+.tcenter{ text-align:center;}
+.text_r{ text-align:right;}
+.hand{ cursor:pointer}
+.bold{ font-weight:bold;}
+.ft12{ font-size:12px;}
+.ft14{ font-size:14px;}
+.ft16{ font-size:16px;}
+.ft18{ font-size:18px;}
+.ft20{ font-size:20px;}
+.ft22{ font-size:22px;}
+.ft24{ font-size:24px;}
+
+/*------------------------------------------间距样式-------------------------------------------*/
+.pt5{ padding-top:5px;}
+.pt10{ padding-top:10px;}
+.pt15{ padding-top:15px;}
+.pt20{ padding-top:20px;}
+.pt25{ padding-top:25px;}
+.pt30{ padding-top:30px;}
+.pt35{ padding-top:35px;}
+
+.pl5{ padding-left:5px;}
+.pl10{ padding-left:10px;}
+.pl15{ padding-left:15px;}
+.pl20{ padding-left:20px;}
+.pl25{ padding-left:25px;}
+.pl30{ padding-left:30px;}
+.pl35{ padding-left:35px;}
+
+.pb5{ padding-bottom:5px;}
+.pb10{ padding-bottom:10px;}
+.pb15{ padding-bottom:15px;}
+.pb20{ padding-bottom:20px;}
+.pb25{ padding-bottom:25px;}
+.pb30{ padding-bottom:30px;}
+.pb35{ padding-bottom:35px;}
+
+.pr5{ padding-right:5px;}
+.pr10{ padding-right:10px;}
+.pr15{ padding-right:15px;}
+.pr20{ padding-right:20px;}
+.pr25{ padding-right:25px;}
+.pr30{ padding-right:30px;}
+.pr35{ padding-right:35px;}
+
+.mt5{ margin-top:5px;}
+.mt10{ margin-top:10px;}
+.mt15{ margin-top:15px;}
+.mt20{ margin-top:20px;}
+.mt25{ margin-top:25px;}
+.mt30{ margin-top:30px;}
+.mt35{ margin-top:35px;}
+.mt40{ margin-top:40px;}
+.mt45{ margin-top:45px;}
+
+.ml5{ margin-left:5px;}
+.ml10{ margin-left:10px;}
+.ml15{ margin-left:15px;}
+.ml20{ margin-left:20px;}
+.ml25{ margin-left:25px;}
+.ml30{ margin-left:30px;}
+.ml35{ margin-left:35px;}
+
+.mb5{ margin-bottom:5px;}
+.mb10{ margin-bottom:10px;}
+.mb15{ margin-bottom:15px;}
+.mb20{ margin-bottom:20px;}
+.mb25{ margin-bottom:25px;}
+.mb30{ margin-bottom:30px;}
+.mb35{ margin-bottom:35px;}
+
+.mr5{ margin-right:5px;}
+.mr10{ margin-right:10px;}
+.mr15{ margin-right:15px;}
+.mr20{ margin-right:20px;}
+.mr25{ margin-right:25px;}
+.mr30{ margin-right:30px;}
+.mr35{ margin-right:35px;}
+
+.nobor{ border:none}
+.relative{ position:relative}
+.relative{ position:relative}
+
+
+/*------------------------------------------文本框样式-------------------------------------------*/
+
+/*------------------------------------------文本框样式-------------------------------------------*/
+
+
+

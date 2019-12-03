@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+    <script>
+        /*var dtd = $.Deferred();
+                                                  var wait = function(dtd) {
+
+                                                      var one = function() {
+                                                          alert("执行完毕1");
+                                                          dtd.resolve();
+                                                      };
+                                                      var two = function() {
+                                                          alert("执行完毕2");
+                                                          dtd.resolve();
+                                                      };
+                                                      var three = function() {
+                                                          alert("执行完毕3");
+                                                          dtd.resolve();
+                                                      };
+                                                      var four = function() {
+                                                          alert("执行完毕4");
+                                                          dtd.resolve();
+                                                      };
+                                                      var five = function() {
+                                                          alert("执行完毕5");
+                                                          dtd.resolve();
+                                                      };
+                                                      setTimeout(one, 5000);
+                                                      setTimeout(two, 5000);
+                                                      setTimeout(three, 5000);
+                                                      setTimeout(four, 5000);
+                                                      setTimeout(five, 5000);
+
+                                                      return dtd;
+
+                                                  };
+
+                                                  $.when(wait(dtd))
+                                                      .done(function() {
+                                                          alert("success");
+                                                      })
+                                                      .fail(function() {
+                                                          alert("error")
+                                                      });*/
+
+
+
+        /*var data;
+        var wait = function() {
+            var dtd = $.Deferred(); // 新建一个Deferred对象
+            var tasks = function() {
+                data = '处理完成';
+                var args = 'byebye';
+                dtd.resolve(args);
+            };
+            setTimeout(tasks, 3000);
+            return dtd.promise();
+        };
+
+        wait().done(function(args) {
+            $("#dd").text(data);
+            alert(args);
+        });*/
+
+
+        var wait = function() {
+            var dtd = $.Deferred(); //在函数内部，新建一个Deferred对象
+            var tasks = function() {
+                alert("执行完毕！");
+                var data="成功了！";
+                dtd.resolve(data); // 改变Deferred对象的执行状态
+            };
+            setTimeout(tasks, 1000);
+            return dtd.promise(); // 返回promise对象
+        };
+
+        $.when(wait())　　
+          .done(function(data) {
+              alert("哈哈，成功了！");
+              alert(data);
+          })　　
+          .fail(function() {
+            alert("出错啦！");
+          });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>div层拖动</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="content" class="content">
+    <div class="right">
+      <div class="draggable">
+        <h4>实验</h4></h4>
+        <p class="lt"></p>
+        <p class="wh"></p>
+        <p class="close">关闭</p>
+      </div>
+      <div class="draggable">
+        <h4>实验</h4></h4>
+        <p class="lt"></p>
+        <p class="wh"></p>
+        <p class="close">关闭</p>
+      </div>
+      <div class="draggable">
+        <h4>实验</h4></h4>
+        <p class="lt"></p>
+        <p class="wh"></p>
+        <p class="close">关闭</p>
+      </div>
+      <div class="draggable">
+        <h4>实验</h4></h4>
+        <p class="lt"></p>
+        <p class="wh"></p>
+        <p class="close">关闭</p>
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery-1.8.3.min.js"></script>
+  <script src="js/interact.js"></script>
+  <script>
+    (function() {
+      $(function() {
+        mydrag();
+      });
+
+      var every_x = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
+      var every_y = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
+
+      var status1 = true,
+        status2 = true,
+        status3 = true,
+        status4 = true;
+
+      function removeByValue(arr, val) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] == val) {
+            arr.splice(i, 1);
+            break;
+          }
+        }
+      }
+
+      Array.prototype.insert = function(index, item) {
+        this.splice(index, 1, item);
+      };
+      var getRandomColor = function() {
+        return '#' +
+          (function(color) {
+            return (color += '0123456789abcdef' [Math.floor(Math.random() * 16)]) &&
+              (color.length == 6) ? color : arguments.callee(color);
+          })('');
+      }
+
+      var mydrag = function() {
+        // target elements with the "draggable" class
+
+        interact('.draggable')
+          .draggable({
+
+            // enable inertial throwing
+            inertia: false,
+
+            // keep the element within the area of it's parent
+            restrict: {
+              restriction: "parent",
+              endOnly: true,
+              elementRect: {
+                top: 0,
+                left: 0,
+                bottom: 1,
+                right: 1
+              }
+            },
+
+
+            maxPerElement: 100,
+            onmove: dragMoveListener,
+
+
+            onend: function(event) {
+              var textEl = event.target.querySelector('p.lt');
+
+              textEl && (textEl.textContent =
+                position(event));
+
+              var closeEl = event.target.querySelector('p.close');
+              closeEl.style.display = 'block';
+
+              drag_s(event);
+
+              myclose(event);
+
+            }
+
+
+          })
+
+          .resizable({
+            // resize from all edges and corners
+            edges: {
+              left: true,
+              right: true,
+              bottom: true,
+              top: true
+            },
+
+            // keep the edges inside the parent
+            restrictEdges: {
+              outer: 'parent',
+              endOnly: true
+            },
+
+            // minimum size
+            restrictSize: {
+              min: {
+                width: 0,
+                height: 0
+              }
+            },
+
+
+            inertia: false
+          })
+          .on('resizemove', function(event) {
+            var s = $(event.target);
+            var target = event.target,
+              x = (parseFloat(target.getAttribute('data-x')) || 0),
+              y = (parseFloat(target.getAttribute('data-y')) || 0),
+              xr = (parseFloat(target.getAttribute('data-x')) || 0) + s.width(),
+              yb = (parseFloat(target.getAttribute('data-y')) || 0) + s.height();
+
+            // update the element's style
+
+
+
+            // translate when resizing from top or left edges
+            x += event.deltaRect.left;
+            y += event.deltaRect.top;
+            xr += event.deltaRect.right;
+            yb += event.deltaRect.bottom;
+
+
+
+
+            var s = $(event.target);
+            var sid = s.attr('id');
+            var ns = parseInt(sid);
+
+            var i = ns * 2
+            every_y[i] = null;
+            every_x[i] = null;
+            every_y[i + 1] = null;
+            every_x[i + 1] = null;
+
+
+
+            for (ax in every_x) {
+              if ((parseInt(every_x[ax]) - 3) <= x && x <= (parseInt(every_x[ax]) + 3)) {
+
+                x = parseInt(every_x[ax]);
+              } else {}
+
+            }
+            for (ay in every_y) {
+              if ((parseInt(every_y[ay]) - 3) <= y && y <= (parseInt(every_y[ay]) + 3)) {
+                y = parseInt(every_y[ay]);
+
+              } else {
+
+
+              }
+            }
+
+            for (a_x in every_x) {
+
+              if ((parseInt(every_x[a_x]) - 3) <= xr && xr <= (parseInt(every_x[a_x]) + 3)) {
+                xr = parseInt(every_x[a_x]);
+
+              } else {
+
+              }
+            }
+            for (a_y in every_y) {
+              if ((parseInt(every_y[a_y]) - 3) <= yb && yb <= (parseInt(every_y[a_y]) + 3)) {
+                yb = parseInt(every_y[a_y]);
+              } else {
+
+              }
+            }
+
+            target.style.width = (xr - x) + 'px';
+            target.style.height = (yb - y) + 'px';
+
+            target.style.webkitTransform = target.style.transform =
+              'translate(' + x + 'px,' + y + 'px)';
+
+            target.setAttribute('data-x', x);
+            target.setAttribute('data-y', y);
+            target.querySelector('p.wh').textContent = (xr - x) + '\u00D7' + (yb - y) + 'px';
+            var textEl = event.target.querySelector('p.lt');
+
+            textEl && (textEl.textContent =
+              position(event));
+
+
+
+          })
+          .on('resizeend', function(event) {
+
+            drag_s(event)
+
+          });
+
+
+
+        function dragMoveListener(event) {
+
+          var target = event.target,
+            // keep the dragged position in the data-x/data-y attributes
+            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+
+          var s = $(event.target)
+          var sid = s.attr('id');
+          var ns = parseInt(sid);
+
+          var i = ns * 2
+          every_y[i] = null;
+          every_x[i] = null;
+          every_y[i + 1] = null;
+          every_x[i + 1] = null;
+
+
+          for (ax in every_x) {
+
+            if ((parseInt(every_x[ax]) - 3) <= x && x <= (parseInt(every_x[ax]) + 3)) {
+
+              x = parseInt(every_x[ax]);
+
+            }
+          }
+          for (ay in every_y) {
+            if ((parseInt(every_y[ay]) - 3) <= y && y <= (parseInt(every_y[ay]) + 3)) {
+              y = parseInt(every_y[ay]);
+
+
+            }
+          }
+
+          for (a_x in every_x) {
+
+            if ((parseInt(every_x[a_x]) - 3) <= (x + s.width()) && (x + s.width()) <= (parseInt(every_x[a_x]) + 3)) {
+
+              x = parseInt(every_x[a_x]) - s.width();
+
+            }
+          }
+          for (a_y in every_y) {
+            if ((parseInt(every_y[a_y]) - 3) <= (y + s.height()) && (y + s.height()) <= (parseInt(every_y[a_y]) + 3)) {
+              y = parseInt(every_y[a_y]) - s.height();
+
+
+            }
+          }
+
+
+          // translate the element
+          target.style.webkitTransform =
+            target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)';
+
+          // update the posiion attributes
+          target.setAttribute('data-x', x);
+          target.setAttribute('data-y', y);
+        }
+
+        function position(e) {
+          return '左' + e.target.getAttribute('data-x') + "上" + e.target.getAttribute('data-y') + 'px'
+        }
+
+        function myclose(event) {
+
+          $(event.target).find(".close").click(function() {
+            $('.left').find('#' + $(this).parent().attr('id')).css('display', 'block');
+            $(this).parent().remove();
+
+            drag_c(event)
+            // removeByValue(every_x, parseFloat(event.target.getAttribute('data-x')));
+          })
+        }
+
+        function drag_s(event) {
+          var s = $(event.target)
+          var sid = s.attr('id');
+          var ns = parseInt(sid);
+          var i = ns * 2
+          // top  right  bottom left   //data-y  data-x+width  data-y+height  data-x
+
+          every_y.insert(i, parseFloat(s.attr('data-y')));
+          every_x.insert(i, parseFloat(s.attr('data-x')) + parseFloat(s.width()));
+          every_y.insert(i + 1, parseFloat(s.attr('data-y')) + parseFloat(s.height()));
+          every_x.insert(i + 1, parseFloat(s.attr('data-x')));
+
+          //console.log(every_x, every_y)
+        }
+
+        function drag_c(event) {
+          var s = $(event.target)
+          var sid = s.attr('id');
+          var ns = parseInt(sid);
+          var i = ns * 2
+          every_y.insert(i, 0);
+          every_x.insert(i, 0);
+          every_y.insert(i + 1, 0);
+          every_x.insert(i + 1, 0);
+        };
+        window.dragMoveListener = dragMoveListener;
+      };
+    })()
+  </script>
+</body>
+
+</html>

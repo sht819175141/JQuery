@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = "1234,3333,2222,555"; //要处理的字符串“1234,3333,2222,555,”这种
+        str = (str.substring(str.length - 1) == ',') ? str.substring(0, str.length - 1) : str;
+        console.log(str)
+    </script>
+</body>
+
+</html>

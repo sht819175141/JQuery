@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		li {
+			list-style: none;
+		}
+
+		#box {
+			width: 300px;
+			margin: 0 auto;
+			height: 190px;
+			overflow: hidden;
+		}
+
+		#box li {
+			float: left;
+			padding: 10px 10px;
+		}
+
+		#box .uls {
+			overflow: hidden;
+		}
+
+		#cont div {
+			text-align: center;
+			font-size: 30px;
+			width: 258px;
+			height: 150px;
+			border: 1px solid blue
+		}
+
+		#box li.con {
+			background: yellow;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="../JQueryVersion/jquery-1.11.1.min.js"></script>
+	<div id="box">
+		<ul class="uls">
+			<li class="con">教育</li>
+			<li>卫生</li>
+			<li>国家</li>
+			<li>社会</li>
+			<li>体育</li>
+		</ul>
+		<div id="cont">
+			<div>1、全家福</div>
+			<div>2、全家福</div>
+			<div>3、全家福</div>
+			<div>4、全家福</div>
+			<div>5、全家福</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$(".uls li").on("mouseover", function () {
+				$(this).addClass("con").siblings().removeClass("con")
+				var sum = $(this).index();
+				$("#cont div").eq(sum).show().siblings().hide();
+			})
+
+		})
+	</script>
+</body>
+
+</html>

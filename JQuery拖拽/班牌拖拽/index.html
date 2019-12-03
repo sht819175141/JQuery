@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml">  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>课程表</title>  
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />  
+<script type="text/javascript" src="../jquery-1.8.0.min.js"></script>  
+<script type="text/javascript" src="../jquery.easyui.min.js"></script>  
+<style type="text/css">  
+.item{  
+    text-align:center;  
+    border:1px solid #499B33;  
+    background:#fafafa;  
+    width:100px;  
+}  
+.left{  
+    width:120px;  
+    float:left;  
+}  
+.left table{  
+    background:#E0ECFF;  
+}  
+.left td{  
+    background:#eee;  
+}  
+.right{  
+    width:570px;  
+}  
+.right table{  
+    background:#E0ECFF;  
+    width:100%;  
+}  
+.right td{  
+    text-align:center;  
+    padding:2px;  
+    background:#E0ECFF;  
+}  
+.right td.drop{  
+    background:#fafafa;  
+    width:100px;  
+}  
+.assigned{  
+    border:1px solid #BC2A4D;  
+}  
+.right td.over{  
+    background:#FBEC88;  
+}  
+</style>  
+<script type="text/javascript">  
+$(function(){  
+    //设置class为item的div拖放效果  
+    $('.left .item').draggable({    
+    revert:true,//放开时，拖动的div回到原位  
+    proxy:'clone' //拖动效果为复制  
+    });    
+    //设置课程表单元格接收拖动元素  
+    $('.right td.drop').droppable({  
+        //当元素被拖入容器时触发  
+        onDragEnter:function(){    
+            $(this).addClass('over'); //添加样式  
+        },    
+        //当元素被拖离容器时触发  
+        onDragLeave:function(){    
+            $(this).removeClass('over');    
+        },   
+        //拖动元素置容器（表格中运用了样式drop的td）中   
+        onDrop:function(e,source){  
+            $(this).removeClass('over');    
+            //如果拖动的元素是课程表中的  
+            if ($(source).hasClass('assigned')){    
+                $(this).append(source);    
+            } else {//如果是从左边课程中拖动             
+                //拷贝拖动的元素，避免课程信息丢失，同时设置以放置课程容器的样式  
+                var c = $(source).clone().addClass('assigned');  
+                //来先清空存在课程，再将元素放入td中  
+                $(this).empty().append(c);   
+                c.draggable({  
+                    revert:true//若未被容器接收，放开时，拖动的div回到原位  
+                });  
+            }  
+        }   
+    });   
+});  
+</script>  
+</head>  
+  
+<body>  
+<div class="right">    
+   <table>    
+       <tr>    
+          <td class="blank"></td>    
+          <td class="title">星期一</td>    
+          <td class="title">星期二</td>    
+          <td class="title">星期三</td>    
+          <td class="title">星期四</td>    
+          <td class="title">星期五</td>    
+        </tr>    
+        <tr>    
+          <td class="time">08:05—09:45</td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+       </tr>    
+       <tr>    
+          <td class="time">10:00—11:40</td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+       </tr>  
+       <tr>    
+          <td class="time">14:25—16:05</td>    
+          <td class="drop">数学</td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+       </tr>   
+       <tr>    
+          <td class="time">16:15—17:55</td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+       </tr>   
+       <tr>    
+          <td class="time">19:30—21:10</td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+          <td class="drop">英语</td>    
+          <td class="drop"></td>    
+          <td class="drop"></td>    
+       </tr>           
+   </table>    
+</div>    
+</body>  
+</html> 

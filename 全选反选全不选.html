@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+	li{list-style: none;}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.min.js"></script>
+	<ul class="uls">
+		<li><input type="checkbox" name="" id="" />青花瓷</li>
+		<li><input type="checkbox" name="" id="" />发如雪</li>
+		<li><input type="checkbox" name="" id="" />义勇军进行曲</li>
+		<li><input type="checkbox" name="" id="" />小酒窝</li>
+		<li><input type="checkbox" name="" id="" />在希望的田野上</li>
+	</ul>
+	<input type="button" id="quan" value="全选"/>
+	<input type="button" id="none" value="全不选"/>
+	<input type="button" id="fan" value="反选"/>
+	<script>
+	$(document).ready(function(){
+		$("#quan").on("click",function(){
+			$(":checkbox").prop("checked",true);		
+		})
+
+		$("#none").on("click",function(){
+			$(":checkbox").prop("checked",false);		
+		})
+		
+		$("#fan").on("click",function(){
+		
+			/*for(var i=0;i<$(":checkbox").length;i++){
+					//var ind=$(this).index
+					if($(":checkbox").eq(i).prop("checked")){
+						$(":checkbox").eq(i).prop("checked",false)
+					}else{
+						$(":checkbox").eq(i).prop("checked",true)
+					}
+				}*/
+
+				/*$(":checkbox").each(function(i){
+
+					if($(":checkbox").eq(i).prop("checked")){
+						$(":checkbox").eq(i).prop("checked",false)
+					}else{
+						$(":checkbox").eq(i).prop("checked",true)
+					}
+
+					if($(this).prop("checked")){
+						$(this).prop("checked",false)
+					}else{
+						$(this).prop("checked",true)
+					}
+
+				})*/
+
+			$(":checkbox").each(function(){
+				$(this).prop("checked",!$(this).prop("checked"));			
+			})
+		})
+	})	
+	</script>
+</body>
+</html>

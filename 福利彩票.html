@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{padding: 0;margin: 0;}
+	#box{height: 800px;}
+	#box1{height: 40px;background: red;text-align: center;line-height: 40px;font-size: 25px;font-weight: bold;}
+	#box h2{width: 30px;height: 50px;font-size: 30px;padding-top: 50px;}
+	#box2{height: 40px;background: blue;text-align: center;line-height: 40px;font-size: 25px;font-weight: bold;margin-top: 200px;}
+	#box h3{width: 30px;height: 50px;font-size: 30px;padding-top: 50px;}
+	#box span a{width:30px; margin:5px 80px; height:30px; list-style:none; line-height:30px; text-align:center; font-size:20px; font-weight:bold;float: left;}
+	#box span a.as{background:red;color: #fff;border-radius: 30px;}
+	#box span a.ass{background:blue;color: #fff;border-radius: 30px;}
+	#box #footer{height: 40px;background: #ccc;text-align: center;line-height: 40px;font-size: 25px;font-weight: bold;margin-top: 200px;}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.js"></script>
+	<div id="box">
+		<div id="box1">双色球机选</div>
+			<div id="one">
+				<h2>红色</h2>
+				<span id="top1"></span>
+				
+			</div>
+		<div id="box2"></div>
+			<div id="two">
+				<h3>蓝色</h3>
+				<span id="up1">
+					
+				</span>
+			</div>
+		<div id="footer">
+			<button id="btn1">清空</button>
+			<button id="btn2">机选</button>
+			<button id="btn3">完成</button>
+		</div>
+	</div>
+	<script>
+		$(function(){
+			var arr=[];
+			var arr1=[];
+			for(var i=1;i<=33;i++){
+				if(i<17){
+					arr1.push(i)	
+				}
+				arr.push(i)
+				
+			}
+			function into(){
+				var brr="";
+				var brr1="";
+				//红球
+				$.each(arr,function(i,val){
+					var num=val<10?"0"+val:val
+					brr+="<span><a>"+num+"</a></span>"
+				})
+				$("#top1").html(brr)
+
+				//篮球
+				$.each(arr1,function(i,val){
+					var sum=val<10?"0"+val:val
+					brr1+="<span><a>"+sum+"</a></span>";
+				})
+				$("#up1").html(brr1)
+			}	
+			into();
+			function random(){
+				var str1=[];
+				var str2=[];
+				$("#top1 a").removeClass("as");
+				$("#up1 a").removeClass("ass");
+				for(var i=0;str1.length<6;i++){
+					var num=Math.floor(Math.random()*32+1)
+					if($.inArray(num,str1)==-1){
+						str1.push(num)
+						$("#top1 a").eq(num-1).addClass("as")
+					}
+				}
+
+				var sum=Math.floor(Math.random()*15+1)
+				str2.push(sum)
+				$("#up1 a").eq(sum-1).addClass("ass")
+			}
+			var timer=null;
+			
+			$("#btn1").on("click",function(){ 
+				$("#top1 a").removeClass("as");
+				$("#up1 a").removeClass("ass")
+				clearInterval(timer)
+				$("#btn2").attr("disabled",false)
+			})
+
+			$("#btn2").on("click",function(){
+				timer=setInterval(random,1000)
+				$(this).attr("disabled",true)
+			})
+			
+			$("#btn3").on("click",function(){
+				clearInterval(timer)
+				$("#btn2").attr("disabled",false)
+			})
+			
+		})
+	</script>
+</body>
+</html>
+	

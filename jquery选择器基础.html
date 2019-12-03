@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+	li{list-style: none;}
+	.test{
+		color: red;
+		font-size: 30px;
+	}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.min.js"></script>
+	<!-- <div id="box">asfsaf</div>
+	<div class="cn">asfasdf</div>
+	<div>阿斯蒂芬大师傅啊</div>
+	<div id="com">
+		<p>撒地方士大夫</p>
+		<div>是幅度萨芬</div>
+		<p>撒地方阿斯蒂芬</p>
+		<input type="text" value="啊萨芬阿三地方 ads"/>
+		<input type="text" value="啊萨芬阿三地方 ads"/>
+		<h1>阿斯顿发射点发大水</h1>
+	</div>
+	<p>阿斯蒂芬阿斯弗</p>
+	
+	<ul id="uls">
+	   	 	<li>list item 1</li>
+	    	<li>list item 2</li>
+	    	<li>list item 3</li>
+	    	<li>list item 4</li>
+	    	<li>list item 5</li>
+	    	<p>asdf asd f</p>
+	</ul>
+	<ol id="ols">
+		<li>阿斯蒂芬大师傅</li>
+	</ol>
+	<div><p>Hello</p></div>
+	<div>Hello again!</div>
+	
+	<ul>
+	      	<li>Hello</li>
+	      	<li>Hello</li>
+	      	<li>Hello</li>
+	</ul>
+	
+	<form action="post" id="form1">
+		<input type="text">
+		<input type="button" value="Button">
+		<input type="password" name="ps" id="pa">
+		<input type="file">
+		<input type="submit" value="提交">
+		<input type="radio" name="w" id="w">
+		<input type="checkbox" name="a" id="a">
+		<input type="checkbox" name="b" id="a">
+		<input type="checkbox" name="c" id="a">
+	</form> -->
+
+	<!-- <form>
+	 	 	<input type="text" name="email"  value="阿斯顿发射点发射点发"/>
+	  		<input type="hidden" name="id" value="撒发射点发大水发"/>
+	</form> -->
+
+	<form>
+ 		<input disabled="disabled" value="沙发沙发 撒地方" />
+  		<input value="阿斯顿发射点反对撒撒"/>
+	</form>
+	<script>
+	/*$("#box").css("background","yellow");
+	//$("div").css("background","green");
+	$(".cn").css("background","blue");
+	//$("*").css("background","#000");
+	//$("div,p").css("background","yellow");
+
+	//层级关系
+	$("#com p").css("background","pink")     //在给定的祖先元素下匹配所有的后代元素
+	$("#com>h1").css("background","orange")   //父元素的所有子元素
+	$("#com+input").css("background","green")  //匹配所有紧接在 prev 元素后的 next 元素
+	$("#com~p").css("background","#000")     //匹配 prev 元素之后的所有 siblings 元素
+	//基本关系
+	$('li:first').css("background","#0ff");
+	$("#uls li:not(:first)").css("background","#00f");
+
+	$("ul li:even").css("background","#f00")
+	$("ul li:odd").css("background","#ff0")
+
+	$("#uls li:eq(2)").css("background","#ff0")
+	$("#uls li:gt(2)").css("color","red")
+	$("#uls li:lt(3)").css("color","red")
+	$(":header").css("background","#00ff00")*/
+
+	//内容
+	/*$("#uls li:contains('1')").hide(2000)
+	$("#uls li:empty").text("5").css("background","#0f0")
+	$("#uls li:parent").css("background","#ccc")
+	$("div:has(p)").addClass("test");
+
+	//可见性
+	$("#uls li:hidden").show(2000)
+	$("#uls li:visible").hide(2000)*/
+	/*$("div[id]").css("background","#ccc")    //查找所有含有 id 属性的 div 元素
+	$("div[class]").css("background","#ccc")    //查找所有含有 class 属性的 div 元素
+	$("div[class='li']").css("background","#f00")  //查找所有 name 属性是 li 的 div 元素
+	$("div[class!='li']").css("background","#f00")  //查找所有 name 属性不是 li 的 div 元素
+	$("div[class^='l']").css("background","#00f")	//查找所有 name 以 'l' 开始的 div 元素
+	$("div[class$='3']").css("background","#0ff")   //查找所有 name 以 '3' 结束的 div 元素
+	$("div[class*='li']").css("background","#ff0")	//查找所有 name 包含 'li' 的 div 元素
+	$("#uls li:first-child").css("background","red")
+	$("#uls li:last-child").css("background","yellow")
+	$("#uls li:nth-child(2)").css("background","pink")*/
+	//$("#ols li:only-child").css("background","green")
+
+	//表格
+	/*alert($("#form1 :input").length)   //匹配所有 input, textarea, select 和 button 元素
+	$("#form1 :text").css("background","red")   //匹配所有的单行文本框
+	alert($("select option:selected").text());
+	$(":file").css("background","#00ff00")   //匹配所有文件域
+	$(":image").css("background","#00ff00")
+	$(":reset").css("background","#00ff00")  //查找所有重置按钮
+	$(":radio").css("background","#00ff00")*/  //匹配所有单选按钮
+
+	$("input:hidden").show(2000)		//匹配所有不可见元素，或者type为hidden的元素
+
+	$("input:enabled").css("background","pink")    // 查找所有可用的input元素
+	$("input:disabled").css("background","blue")   //查找所有不可用的input元素
+	$("input:checked")	//匹配所有选中的被选中元素(复选框,单选框等,不包括select中的option)
+	$("select option:seclected").css("background","green")   //匹配所有选中的option元素
+	/*$('ul li:last').addClass(function(){
+ 	 	return 'item-' + $(this).index();
+	});*/
+	</script>
+</body>
+</html>

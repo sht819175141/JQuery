@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #demo {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="demo" style="background: #ffffff; overflow: hidden;width: 150px; color: #0000ff; height: 200px">
+        <div id="demo1">
+            <ul>
+                <li>壹壹壹壹壹壹壹壹壹壹壹壹壹壹壹壹壹壹壹</li>
+                <li>贰贰贰贰贰贰贰贰贰贰贰贰贰贰贰贰贰贰贰</li>
+                <li>叁叁叁叁叁叁叁叁叁叁叁叁叁叁叁叁叁叁叁</li>
+                <li>肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆</li>
+            </ul>
+        </div>
+        <div id="demo2"></div>
+    </div>
+
+
+    <SCRIPT language="javascript">
+    
+        txtMarquee("#demo1", "#demo2", "#demo", 600)
+
+        function txtMarquee(x, y, z, speed) {
+            const demo1 = document.querySelector(x);
+            const demo2 = document.querySelector(y);
+            const box = document.querySelector(z);
+
+            const demohei = demo1.offsetHeight;
+            const boxhei = box.offsetHeight;
+
+            if (demohei > boxhei) {
+                demo2.innerHTML = demo1.innerHTML;
+                var MyMar = setInterval(function() {
+
+                    if (demo2.offsetTop - box.scrollTop <= 0) {
+                        box.scrollTop -= demo1.offsetHeight;
+                    } else {
+                        box.scrollTop++;
+                    }
+                }, speed);
+            }
+        }
+    </SCRIPT>
+
+
+</body>
+
+</html>

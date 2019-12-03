@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#box {
+			width: 735px;
+			height: 160px;
+			margin: 50px auto;
+		}
+
+		dl dt {
+			width: 45px;
+			height: 150px;
+			float: left;
+			background: yellow;
+			text-align: center;
+			line-height: 39px;
+			font-weight: bold;
+			font-size: 28px;
+			color: #fff;
+			border: 1px solid #ccc;
+		}
+
+		dl .on {
+			background: #eee;
+			color: #00ff00;
+		}
+
+		dl dd {
+			float: left;
+			position: relative;
+		}
+
+		dl dd img {
+			width: 0;
+			height: 149px;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="jq/jquery-2.1.1.min.js"></script>
+	<div id="box">
+		<dl>
+			<dt>中央一台</dt>
+			<dd class="on"><img src="images/1.png"></dd>
+		</dl>
+		<dl>
+			<dt>中央二台</dt>
+			<dd><img src="images/2.png"></dd>
+		</dl>
+		<dl>
+			<dt>中央三台</dt>
+			<dd><img src="images/3.png"></dd>
+		</dl>
+		<dl>
+			<dt>中央六台</dt>
+			<dd class="on"><img src="images/6.png"></dd>
+		</dl>
+		<dl>
+			<dt>中央五台</dt>
+			<dd><img src="images/5.png"></dd>
+		</dl>
+	</div>
+	<script>
+		$(function () {
+			$.each($("dl dt"), function () {
+				$(this).on("mouseover", function () {
+					$(this).parent().siblings().find("dt").removeClass("on");
+					$(this).addClass("on");
+
+					$(this).next().find("img").animate({
+						"width": 330
+					})
+					$(this).parent().siblings().find('img').stop().animate({
+						'width': '0'
+					});
+				})
+			})
+		})
+	</script>
+</body>
+
+</html>

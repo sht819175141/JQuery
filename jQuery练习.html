@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		#box{height: 200px;width: 200px;}
+		li{list-style: none;}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.min.js"></script>
+	<input type="checkbox" id="check" /><label for="check">未选中</label><br>
+	<input type="checkbox" id="ched" checked="checked"/><label for="ched">选中</label>
+	<ul class="lis">
+		<li>1、你好啊</li>
+		<li>2、你好啊</li>
+		<li>3、你好啊</li>
+		<li>4、你好啊</li>
+		<li>5、你好啊</li>
+	</ul>		
+	<script>
+	//延迟加载案例	
+	//1、window.onload=function(){    ///延迟加载，当页面加载完毕后，在加载脚本;
+		/*	alert("1111")    ///原生的加载的方式
+		}*/
+		// $("#box").css("background","red").click(function(){
+		// 	$("#box").css({"height":541,"width":354,"background":"blue"})
+		// })
+	//2、定时器
+	//解决多库共存
+	//1、
+	/*var a=jQuery.noConflict();
+		a(function(){
+			alert("155416")
+		})*/	
+	//第二种
+	/*(function($){
+		alert("3514")
+	})(jQuery)*/
+	//jQuery转原生;	
+	//$("#box")[0].style.background="yellow";
+
+	//JQ加载方式
+	//1、$(function(){})
+	//2、$(document).ready(function(){})
+	//3、多库共存：
+
+		/*一、var a=jQuery.noConflict();
+			a(function(){})	
+
+		二、(function($){})(jQuery)*/ //用的最多的(匿名自执行函数)
+		
+	//console.log($("#check").prop("checked"))
+	//console.log($("#ched").prop("checked"))
+	/*console.log($("#check").prop("class","inp"))
+	//console.log($("#check").prop("id","com"))
+	console.log($("#check").attr("id","com"))
+	$("#com").attr("checked",true);
+
+	var arr=[["one","two","three"],["four","five","six"],["seven","eight","nine"]]
+	
+	$.each(arr,function(i,ele){
+		/*console.log(i);
+		console.log(ele)*/
+	/*	$.each(ele,function(i,val){
+			console.log(i);
+			console.log(val)
+		})
+	})*/
+
+	/*$(arr).each(function(i,ele){
+		$(ele).each(function(i,val){
+			console.log(i);
+			console.log(val)
+		})
+	})*/
+	/*$(".lis li").each(function(i,val){
+		console.log(i);
+		console.log(val);
+	})*/
+	var obj={
+		"one":1,
+		"two":2,
+		"three":3
+	}
+	$.each(obj,function(i,val){
+		console.log(i);
+		console.log(val)
+	})	
+	</script>
+</body>
+</html>

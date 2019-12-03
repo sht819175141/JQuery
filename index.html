@@ -1,0 +1,72 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="utf-8"/>  
+    <title>基于浏览器的HTML5查找地理位置</title> 
+    <!-- 百度API -->
+ <script src="http://api.map.baidu.com/api?v=1.2" type="text/javascript"></script>
+  <script>
+           function getLocation(){
+               var options={
+                   enableHighAccuracy:true,
+                   maximumAge:1000
+               }
+               if(navigator.geolocation){
+                   //浏览器支持geolocation
+                   navigator.geolocation.getCurrentPosition(onSuccess,onError,options);
+                   alert("支持")
+               }else{
+                   //浏览器不支持geolocation
+               }
+           }
+
+           //成功时
+           function onSuccess(position){
+
+               //返回用户位置
+               //
+               alert("成功了")
+               //经度
+               var longitude =position.coords.longitude;
+               //纬度
+               var latitude = position.coords.latitude;
+           }
+
+
+           //失败时
+           function onError(error){
+               alert("失败了")
+               switch(error.code){
+                   case 1:
+                   alert("位置服务被拒绝");
+                   break;
+
+                   case 2:
+                   alert("暂时获取不到位置信息");
+                   break;
+
+                   case 3:
+                   alert("获取信息超时");
+                   break;
+
+                   case 4:
+                    alert("未知错误");
+                   break;
+               }
+
+
+
+           }
+
+           window.onload=getLocation;
+   </script>
+</head>
+<body>
+
+
+<div id="allmap"></div>
+
+
+
+</body>
+</html>

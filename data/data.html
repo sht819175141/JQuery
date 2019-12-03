@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <style>
+        .col {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<select name="" id="year">
+    <option value="2011">2011年</option>
+    <option value="2012">2012年</option>
+    <option value="2013">2013年</option>
+    <option value="2014">2014年</option>
+    <option value="2015">2015年</option>
+    <option value="2016">2016年</option>
+    <option value="2017">2017年</option>
+    <option value="2018">2018年</option>
+    <option value="2019">2019年</option>
+</select>
+<select name="" id="mon">
+    <option value="1">1月</option>
+    <option value="2">2月</option>
+    <option value="3">3月</option>
+    <option value="4">4月</option>
+    <option value="5">5月</option>
+    <option value="6">6月</option>
+    <option value="7">7月</option>
+    <option value="8">8月</option>
+    <option value="9">9月</option>
+    <option value="10">10月</option>
+    <option value="11">11月</option>
+    <option value="12">12月</option>
+</select>
+<table border="1">
+    <thead>
+    <th>星期日</th>
+    <th>星期一</th>
+    <th>星期二</th>
+    <th>星期三</th>
+    <th>星期四</th>
+    <th>星期五</th>
+    <th>星期六</th>
+    </thead>
+    <tbody></tbody>
+</table>
+<script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+<script src="js/data.js"></script>
+<script>
+    var yy, mm;
+    sel();
+    $("select").change(function () {
+        $("tbody").html("");
+        yy = $("#year").val();
+        mm = $("#mon").val();
+        sel()
+    })
+
+    function sel() {
+        $("body").aa({
+            y: yy,
+            m: mm
+        })
+    }
+
+</script>
+</body>
+</html>

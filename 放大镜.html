@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin:0;padding: 0}
+	#box{width:800px;height: 300px;border:1px solid #ccc;margin: 0 auto}
+	
+	#min{width:300px;height: 225px;position: relative;float: left}
+	b{width:100px;height: 100px;background:blue;opacity: 0.5;position: absolute;top:0;left:0;}
+	
+	#max{width:300px;height: 300px;overflow: hidden;float: right;position: relative;}
+
+	#imgs{position: absolute;left:0;top:0;} 
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.js"></script>
+	<div id="box">
+		<div id="min">
+			<img src="images/smallpic.jpg">
+			<b></b>
+		</div>
+		<div id="max">
+			<img src="images/bigpic.jpg" id="imgs">
+		</div>	
+	</div>
+	<script>
+		$(document).ready(function(){
+			$("#min").on("mousemove",function(e){
+				
+				var L=e.pageX-$(this).offset().left-$("b").width()/2;
+				var H=e.pageY-$(this).offset().top-$("b").height()/2;
+
+				var maxl=$(this).outerWidth()-$("b").outerWidth()
+				var maxh=$(this).outerHeight()-$("b").outerHeight()
+
+				if(L<0)L=0;
+				if(L>maxl)L=maxl
+
+				if(H<0)H=0;
+				if(H>maxh)H=maxh 
+
+				$("b").css({"left":L,"top":H})
+
+				var le=$("#imgs").width()/$(this).width()*L;
+				var he=$("#imgs").height()/$(this).height()*H;
+
+				$("#imgs").css({"left":-le,"top":-he})		
+			})
+
+			/*$("#min").on("mouseup",function(){
+				$(this).off("mousemove");
+				//document.onmousemove=null;
+			})*/
+
+			/*$("#min").on("mouseout",function(){
+				$("b").hide();
+				$("#max").hide();
+			})*/			
+		})
+	</script>
+</body>
+</html>

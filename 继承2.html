@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		// var arr=[1,2,3,4,5,6,7,8,9];
+		// var res=[];
+		// for (var i = 0,len = arr.length; i < len; i++) {
+		// 	var j = Math.floor(Math.random()*arr.length)
+		// 	res[i] = arr[j]
+		// 	arr.splice(j,1)
+		// };
+		// console.log(res) 
+
+		/*function foo(x){
+			var temp = 3;
+			function bar(y){
+				alert(this)
+				alert(temp)
+				alert(x+y+(++temp))
+			}
+			bar(10)
+		}
+		foo(2)*/
+
+
+		/*function foo(x){
+			var temp = 3;
+			return function bar(y){
+				alert(this)
+				alert(temp)
+				alert(x+y+(++temp))
+			}
+		}
+		var bar = foo(2)
+		bar(10)
+		bar(10)
+		bar(10)*/
+		
+
+		// var date1 = new Date("2016","4","6").getTime();
+		// var date2 = new Date("2016","2","15").getTime();
+		// var day = date1-date2;
+		// var days = (day/(1000*60*60*24))
+		// console.log(days)
+		// var test = (function(a){
+		// 	this.a = a;
+		// 	return function(b){
+		// 		console.log(b)
+		// 		return this.a+b
+		// 	}
+		// })(1)
+		// console.log(a)
+
+		// console.log(test(4))
+
+
+		// // 原型链继承
+
+		// function Box(){
+		// 	this.name = "Tom"
+		// }
+		// function Desk(){
+		// 	this.age = 100
+		// }
+		// Desk.prototype = new Box()
+		// var desk = new Desk()
+		// console.log(desk.name)
+
+		// 本质: 重写原型对象
+		// desk得到的是Box构造实例和原型里的信息
+		//每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针。
+													//constructor	__proto__
+		// 缺点: 1、共享
+		// 	     2、没有办法在不影响所有对象实例的情况下给超类型的构造函数传参。
+
+		// function Box(){
+		// 	this.name = "Tom"
+		// }
+		// //Box.prototype.name = "jack"
+		// function Desk(){
+		// 	this.age = 100
+		// }
+		// var d = Desk.prototype // 字面量重写原型会中断继承 子类型无法给超类型传参
+		// var d = new Box()
+		// var desk = new Desk()
+		// console.log(desk.name) // 就近原则
+
+		// // 子类型从属于自己或者他的超类型
+		// alert(desk instanceof Desk)		// true
+		// alert(desk instanceof Box)		// true
+		// alert(desk instanceof Object)	// true
+
+		
+		// 借用构造函数(对象冒充)
+		
+		// function Box(name,age){
+		// 	this.name = name;
+		// 	this.age = age;
+		// 	this.family = ["哥哥","姐姐"]
+		// }
+		// Box.prototype.family = "弟弟" //
+		// function Desk(name,age){
+		// 	Box.call(this,name,age) // this指的是Desk
+		// 	// Desk实例调用了Box构造函数
+		// }
+		// var desk = new Desk("Lisa",20);
+		// console.log(desk.name)
+		// console.log(desk.family)
+
+		// 15210995731 
+		
+		function Box(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Box.prototype.family = "弟弟" //无法继承原型上的东西，只能继承构造里的信息
+
+		function Desk(name,age){
+			Box.call(this,name,age) // this指的是Desk
+			
+			//call方法指定函数desk内部的this绑定当前环境（对象），并且参数为1和2
+		}
+		var desk = new Desk("Lisa",20);
+		console.log(desk.name)
+		console.log(desk.family)
+
+		
+		// function Box(name,age){
+		// 	this.name = name;
+		// 	this.age = age;
+		// 	this.family = ["哥哥","姐姐"]
+		// }
+		// function Desk(name,age){
+		// 	Box.call(this,name,age) // this指的是Desk
+		// }
+		// var desk = new Desk("Lisa",20);
+		// console.log(desk.name)
+		// console.log(desk.family)
+		// desk.family.push("弟弟")
+		// console.log(desk.family)
+		// var desk2 = new Desk("Lisa",20) // 引用类型放在构造里无法共享
+		// console.log(desk2.family)
+
+		
+		// function Box(name,age){
+		// 	this.name = name;
+		// 	this.age = age;
+		// 	this.family = ["哥哥","姐姐"];
+		// 	this.run = function(){}
+		// 	// 构造函数中的方法,每次实例化,都会分配一个内存地址,浪费内存
+		// 	// 所以最好放在原型上,保证多次实例化只有一个地址
+		// }
+		// function Desk(name,age){
+		// 	Box.call(this,name,age) // this指的是Desk
+		// }		
+		// var desk = new Desk("Lisa",20);
+		// console.log(desk.name)
+
+
+
+		// 组合继承
+
+		// function Box(name,age){
+		// 	this.name = name;
+		// 	this.age = age;
+		// 	this.family = ["哥哥","姐姐"];
+		// }
+		// Box.prototype.run = function(){
+		// 	return this.name + this.age +"运行中..."
+		// }`
+		// function Desk(name,age){
+		// 	Box.call(this,name,age) // this指的是Desk
+		// }		
+		// Desk.prototype = new Box()
+		// var desk = new Desk("Lisa",20);
+		// console.log(desk.run())
+
+
+
+		// 原型式继承
+
+		// function obj(o){
+		// 	function F(){}
+		// 	F.prototype = o;
+		// 	return new F()
+		// }
+		// // 子面量声明的方式 var box = var new box()
+		// // box为一个对象的实例
+		// var box = {
+		// 	name : "Lisa",
+		// 	age : 20,
+		// 	family : ['哥哥','姐姐']
+		// } 
+		// // box1就是new F()
+		// var box1 = obj(box)
+		// alert(box1.name)
+		// alert(box1.family)
+		// box1.family.push("弟弟")
+		// alert(box1.family)
+		// var  box2 = obj(box)	// 引用类型属性共享了
+		// alert(box2.family)	
+
+
+
+		// 寄生式继承(原型式+工厂模式)
+		// function obj(o){
+		// 	function F(){}
+		// 	F.prototype = o
+		// 	return new F()
+		// }
+		// function create(o){ // 寄生函数
+		// 	var f = obj(o)
+		// 	f.run = function(){
+		// 		return this.name + "方法"
+		// 	}
+		// 	return f
+		// }
+		// var box = {
+		// 	name : "Lisa",
+		// 	age : 20
+		// }
+		// var box1 = create(box)
+		// alert(box1.run())
+
+
+		// 克隆
+		// function Person(name,age){
+		// 	this.name = name;
+		// 	this.age = age
+		// }
+		// var person = new Person("Jack",100);
+		// console.log(person.name)
+
+		// var clonePerson = Object.create( person )
+		// console.log(clonePerson.__proto__)
+		//但原型模式的真正目的并非在于需要得到一个一模一样的对象，而是提供了一种便捷的方式去创建౼个类型的对象，克隆只是创建这个对象的过程和手段。 
+		
+		// function (obj){
+		// 	var F = function(){}	=>  Object.create
+		// 	F.prototype = obj;
+		// 	return new F()
+		// }
+
+		// var obj1 = new Object();
+		// var obj2 = {}; 
+		// console.log( Object.getPrototypeOf( obj1 ) === Object.prototype ); // true
+		// console.log( Object.getPrototypeOf( obj2 ) === Object.prototype ); // true
+
+		// function Person(name){
+		// 	this.name = name
+		// }
+		// Person.prototype.show = function(){
+		// 	return "你好，"+this.name
+		// }
+		// var obj = new Person("Tom");
+		// alert(obj.show())
+		// console.log(Person.prototype)
+		// console.log(Object.getPrototypeOf(obj) === Person.prototype)
+
+		
+		// 寄生组合式继承
+		// function obj(o){
+		// 	function F(){}
+		// 	F.prototype = o
+		// 	return new F()
+		// }
+		// function create(box,desk){
+		// 	var f = obj(box.prototype)
+		// 	desk.prototype = f
+		// }
+		// function Box(name,age){
+		// 	this.name = name
+		// 	this.age = age
+		// }
+		// Box.prototype.show = function(){
+		// 	return this.name+this.age+"运行中..."
+		// }
+		// function Desk(name,age){
+		// 	Box.call(this,name,age)
+		// }
+		// create(Box,Desk)
+		// var desk = new Desk("Lisa",20)
+		// console.log(desk.show())
+
+	</script>
+</body>
+</html>

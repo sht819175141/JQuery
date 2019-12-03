@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin: 0;list-style: none;}
+		a{text-decoration: none;}
+		.clear{clear: both;}
+		#cont{width: 1200px;border: 1px solid #ccc;}
+		.cols{width: 1200px;border-bottom: 1px solid #ccc;}
+		.cols b{float: left;width: 80px;text-align: center;height: 40px;line-height: 40px;}
+		.right{float: left;width: 900px;padding-left: 20px;height: 40px;overflow: hidden;}
+		.right ul li{float: left;line-height: 40px;padding-left: 20px;}
+		.right .btns{margin-left: 400px;}
+		.btns button{width: 50px;height: 30px;margin-right: 40px;}
+		.cols p{float: left;}
+		.cols p a{float: left;margin-left: 20px;line-height: 30px;width: 60px;text-align: center;height: 30px;background-color: #ccc;margin-top: 5px;}
+	</style>
+</head>
+<body>
+	<div id="cont">
+		<div class="cols">
+			<b>线路玩法:</b>
+			<div class="right">
+				<ul>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+					<li>昆明-大理-丽江(123)</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<p>
+				<a href="javascript:;"  class="btn1">更多▼</a>
+				<a href="javascript:;"  class="btn2">多选+</a>
+			</p>
+			<div class="clear"></div>
+		</div>
+		<div class="cols">
+			<b>游玩天数:</b>
+			<div class="right">
+				<ul>
+					<li>1天(123)</li>
+					<li>2天(123)</li>
+					<li>3天(123)</li>
+					<li>4天(123)</li>
+					<li>5天(123)</li>
+					<li>6天(123)</li>
+					<li>7天(123)</li>
+					<li>8天(123)</li>
+					<li>9天(123)</li>
+					<li>10天(123)</li>
+					<li>11天(123)</li>
+					<li>12天(123)</li>
+					<li>13天(123)</li>
+					<li>14天(123)</li>
+					<li>15天(123)</li>
+					<li>16天(123)</li>
+					<li>17天(123)</li>
+					<li>18天(123)</li>
+					<li>19天(123)</li>
+					<li>20天(123)</li>
+					<li>30天(123)</li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<p>
+				<a href="javascript:;" class="btn1">更多▼</a>
+				<a href="javascript:;" class="btn2">多选+</a>
+			</p>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<script src="jq/jquery-2.1.1.js"></script>
+	<script>
+		$(function(){
+			$(".cols").on("click",".btn1",function(){
+				if ($(this).text()=="更多▼") {
+					$(this).parent().prev().height("auto");
+					$(this).text("收起▲")
+				}else{
+					$(this).parent().prev().height("40px");
+					$(this).text("更多▼")
+				}
+			})
+			$(".cols").on("click",".btn2",function(){
+				var paren=$(this).parent("p");
+				console.log(paren)
+				var prev=paren.prev();
+				prev.height("auto");
+				prev.find("li").prepend($("<input type='checkbox' />"));
+				prev.append($("<div class='btns'><button class='qd'>确定</button><button class='qx'>取消</button></div>"))
+				$(this).parent().empty();
+				$(".qx").on("click",function(){
+					prev.height("40px");
+					prev.find("input").remove();
+					$(".btns").remove();
+					paren.append($("<a href='javascript:;' class='btn1'>更多</a><a href='javascript:;' class='btn2'>多选+</a>"))
+				})
+			})
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #box {
+        width: 1180px;
+        height: 120px;
+        position: relative;
+        border: solid 2px red;
+        overflow: hidden;
+    }
+
+    #box li {
+        float: left;
+        position: absolute;
+        list-style: none;
+    }
+</style>
+<body>
+<script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+<ul id="box">
+    <li><img src="images/1.png"></li>
+    <li><img src="images/2.png"></li>
+    <li><img src="images/3.png"></li>
+    <li><img src="images/6.png"></li>
+    <li><img src="images/5.png"></li>
+    <li><img src="images/2.png"></li>
+    <li><img src="images/1.png"></li>
+    <li><img src="images/2.png"></li>
+    <li><img src="images/3.png"></li>
+    <li><img src="images/6.png"></li>
+    <li><img src="images/5.png"></li>
+    <li><img src="images/2.png"></li>
+</ul>
+<script>
+    $(document).ready(function () {
+        $('#box li').each(function () {
+            var st = $(this).index() - 1
+            if (st == 1) {
+                $(this).css('left', '330px')
+            }
+            if (st == 14) {
+                $(this).css('right', '0px')
+            }
+            if (st > 1) {
+                $(this).css('left', 50 * (st) + 330 + 'px')
+            }
+            $(this).on('mouseover', function () {
+                $(this).css('left', 50 * (st + 1) + 'px')
+            })
+        })
+    })
+
+</script>
+</body>
+</html>

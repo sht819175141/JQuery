@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>  
+		<label>请选择一个文件：</label>  
+		<input type="file" id="file" />  
+		
+		<input type="file" value="读取图像" id="imgbtn" />  
+		<input type="file" value="读取二进制数据" id="twobtn" />  
+		<input type="file" value="读取文本文件" id="filebtn" />  
+	</p>  
+
+	<div id="result" name="result"></div>
+	<script type="text/javascript">  
+		var result=document.getElementById("result");  
+		var file=document.getElementById("file"); 
+
+		var imgbtn=document.getElementById("imgbtn");
+		var twobtn=document.getElementById("twobtn");
+		var filebtn=document.getElementById("filebtn"); 
+
+		//判断浏览器是否支持FileReader接口  
+		if(typeof FileReader == 'undefined'){  
+		    result.InnerHTML="<p>你的浏览器不支持FileReader接口！</p>";  
+		    //使选择控件不可操作  
+		    file.setAttribute("disabled","disabled");  
+		}  
+		  
+		filebtn.onchange=function(){
+			var reader=new FileReader();
+			if(!input.files[0]) return ;
+			reader.readAsDataURL(input.files[0]);
+			
+			reader.onload=function(){
+				box.style.background="url("+reader.result+") center center";
+				box.style.backgroundSize="100% 100%";
+				/*console.log(reader)*/
+			}
+		} 
+	</script>  
+</body>
+</html>

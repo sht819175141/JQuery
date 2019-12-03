@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		.box{
+			height:100px;
+			width:100px;
+			background: yellow;
+			position: absolute;
+			left: 0;
+			bottom: 20px; 
+			transition: left linear 3000ms;
+		}
+		.right{
+			left: 90%;
+		}
+	</style>
+</head>
+<body>
+	<button class="lefts">向左</button>
+	<button class="rights">向右</button>
+	<div class="box">阿斯顿阿斯顿</div>	
+	<ul>
+		<li><a href="http://www.baidu.com">百度</a></li>
+		<li><a href="#/home">首页</a></li>
+		<li><a href="#/list">列表页</a></li>
+		<li><a href="#/footer">尾部</a></li>
+	</ul>
+	<script>
+		var rights=document.querySelector('.rights');
+		var box=document.querySelector('.box');
+		
+		window.onhashchange=function(){
+			console.log(location.hash)
+		}
+
+		/*监听历史记录点，直观的可认为是监听URL的变化，但会忽略URL的hash部分，监听URL的hash部分，HTML5有新的API为 onhashchange ，我的博客里也有说到该方法和跨浏览器的兼容解决方案。可以通过 window.onpopstate 来监听url的变化，并且可以获取存储在该历史记录点的状态对象，也就是上文说到的json对象*/
+
+		// 当前的url为：http://qianduanblog.com/post-1.html
+		window.onpopstate=function(){
+		     // 获得存储在该历史记录点的json对象
+		     var json=window.history.state;
+		     // 点击一次回退到：http://qianduanblog.com/index.html
+		     // 获得的json为null
+		     // 再点击一次前进到：http://qianduanblog.com/post-1.html
+		    // 获得json为{time:1369647895656}
+		}
+
+		window.addEventListener("popstate",()=>{
+			if(location.href.indexOf("right")==-1){
+				box.classList.remove("right")
+			}else if(location.href.indexOf("right")>=-1){
+				box.classList.add("right")
+			}
+		},false)
+
+		rights.onclick=function(){
+			history.pushState('',null,location.href+"?right")
+		}
+
+		for(i=0, j=0; i<10, j<6; i++, j++){
+		  k = i + j;
+		  console.log(k)
+		}
+
+	</script>
+</body>
+</html>

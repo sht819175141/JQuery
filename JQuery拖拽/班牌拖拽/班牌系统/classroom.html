@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="module_list">
+			<div class="item" date-id="5" date-url="adad">
+				<ul class="uls">
+					<li class="li2"></li>
+					<li class="li4"></li>
+				</ul>
+				<div></div>
+				<p>班级空间按时</p>
+			</div>
+			<div class="item">签到请假
+				<ul class="uls">
+					<li class="li2"></li>
+					<li class="li4"></li>
+				</ul>
+
+			</div>
+			<div class="item">公告新闻</div>
+			<div class="item">课程表</div>
+			<div class="item">个人中心</div>
+			<div class="item">历史课程</div>
+			<div class="item">出校记录</div>
+			<div class="item">大事记</div>
+			<div class="item">通讯录</div>
+			<div class="item">修改密码</div>
+		</div>
+		<div class="con_list"></div>
+	</div>
+	<script src="js/jquery-2.1.1.js"></script>
+	<script>
+		$(".module_list .item").on("mousedown",function(e){
+			var e = event || window.event;
+			$(this).css({"cursor":"move"});
+			var that=$(this);
+
+			var lf=e.pageX-$(this).offset().left;
+			var tp=e.pageY-$(this).offset().top;
+
+			$(document).on("mousemove",function(e){
+				var event=e || window.event;
+				var lx=event.pageX-lf;
+				var tx=event.pageY-tp;
+
+				//判断距离，不能超出浏览器界限
+				var maxW=document.documentElement.clientWidth-that.outerWidth();
+				var maxH=document.documentElement.clientHeight-that.outerHeight();
+				if(lx<0)lx=0;
+				if(tx<0)tx=0;
+
+				if(lx>maxW) lx=maxW;
+				if(tx>maxH) tx=maxH;
+
+				that.css({"position":"absolute"}).offset({"left":lx,"top":tx})
+
+			})
+			$(document).on("mouseup",function(e){
+				var e = event || window.event;
+				var box_x = $(".con_list").offset().left;     //容器左上角x坐标
+				var box_y = $(".con_list").offset().top;      //容器左上角y坐标
+				var box_width = $(".con_list").outerWidth();  //容器宽
+				var box_height = $(".con_list").outerHeight();//容器高
+
+				//判断放开鼠标位置是否想允许放置的容器范围内
+				if(e.pageX > box_x && e.pageX < box_x-0+box_width && e.pageY > box_y && e.pageY < box_y-0+box_height){
+					$(this).off("mousemove");
+					$(".con_list").append(that);
+				}else{
+					that.hide();
+					$(".module_list").append(that);
+				}
+			})
+		})
+
+		/*lis[2].onclick=function(){
+			that.css("width",100%,"height",100%);
+		}
+
+		lis[4].onclick=function(){
+			box.style.display="none";
+		}*/
+	</script>
+</body>
+</html>

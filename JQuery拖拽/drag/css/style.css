@@ -1,0 +1,28 @@
+html,body{
+    width: 100%;
+    height: 100%;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.list{
+    flex: none;
+    width: 300px;
+    line-height: 50px;
+
+}
+.list li{
+    border-bottom: 1px solid #ccc;
+}
+.canvasDom{
+    flex: auto;
+}
+#painter{
+    border: 5px solid slateblue;
+}

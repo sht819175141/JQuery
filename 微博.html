@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <title></title>
+    <link href="css/index.css" rel="stylesheet" />
+    <script src="jq/jquery-2.1.1.js"></script>
+<script>
+//后续增加的，要想继续用，就用代理事件
+ $(function(){
+ 	//点击下边，在上边显示，
+    $("[node-type=medalOfHidden]").on("click","li",function(){
+        var conten=$(this).html();
+        //设置带有(empty)第一个li的内容，添加上去以后，再删除样式
+        //empty是上边白墙上的勋章俩字
+        $("[node-type=medalOfShow]>li.empty:first").html(conten).removeClass("empty")
+        //添加上去以后，删除下边的;
+        $(this).remove();
+    })
+    //点击上面关闭，在下面显示
+    $("[node-type=medalOfShow]").on("click",".ico_closeZ>a",function(){
+    	//先找到内容，用代理事件，确定
+    	 var conten=$(this).parents("li").html();
+    	 //把设置了内容的li，追加到下边
+    	 $("<li>").html(conten).appendTo("[node-type=medalOfHidden]");
+    	 //点击过后，删除上边的
+    	 $(this).parents("li").remove();
+    	 //设置note-type，添加empty的样式，把他追加到上边
+    	 $("<li>").attr("note-type","showMedal").addClass("empty").appendTo("[node-type=medalOfShow]")
+    })
+    //按下鼠标左键，用代理事件
+    $("[node-type=medalOfHidden]").on("mousedown","li",function(e){
+    	//确定鼠标点下的位置
+    	var l=e.pageX-$(this).offset().left;
+    	var t=e.pageY-$(this).offset().top;
+    	//给鼠标设置可以拖动的小手，四方形的，不是点击小手
+    	$(this).css({"cursor":"move"})
+    	var clis=$(this)
+    	//点击拖动
+    	$(document).on("mousemove",function(e){
+    		//现在确定的是鼠标随意点下的位置，在拖拽时曾用到;
+    		var movel=e.pageX-l;
+    		var movet=e.pageY-t;
+    		//给被点击的li设置定位，设置距离，存在bug，使用offset();
+    		clis.css({"position":"absolute"}).offset({"left":movel,"top":movet})
+    	}) 
+    	//松开开鼠标后，移动停止
+    	$(document).on("mouseup",function(){
+    		//$(this).document=null;
+    		$(this).off("mousemove");
+    	})
+    })
+ })
+         
+</script>
+</head>
+<body style="width:3000px">
+    <div class="med_left_otd">
+        <div class="box_blWrap boxbl_02 boxbl_xzzs" id="pl_myMedals_setting">
+            <div class="hd_blmed">
+                <div class="tit tit_ico2">设置勋章在微博展示</div>
+            </div>
+            <div class="bd_blmed_btm">
+                <div class="bd_blmed">
+
+                    <div class="show_xzWrap">
+                        <div class="ls_text">展示勋章：（勋章可全部设置展示，前6枚勋章会在名片中展示）</div>
+                        <ul class="ul_medLs_3 show clearfix" node-type="medalOfShow">
+                            <li node-type="showMedal">
+                                <div class="img_show" node-type="unitMedal" action-data="mid=8">
+                                    <div class="ico_closeZ">
+                                        <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                    </div>
+                                    <div class="img_ls">
+                                        <img
+                                         src="images/8_s.gif" />
+                                    </div>
+                                    <div class="tit_list"><a title="勋章：谈笑风生" href="javascript:void(0);">谈笑风生</a></div>
+                                </div>
+                            </li>
+
+
+                            <li node-type="showMedal" class="empty"></li>
+                            <li node-type="showMedal" class="empty"></li>
+                            <li node-type="showMedal" class="empty"></li>
+                            <li node-type="showMedal" class="empty"></li>
+                            <li node-type="showMedal" class="empty"></li>
+                            <li node-type="showMedal" class="empty"></li>
+                            <li node-type="showMedal" class="empty"></li>
+                        </ul>
+                        <div class="dotline1"></div>
+
+
+                        <div class="ls_text clearfix">
+                            <div class="lf">隐藏勋章：（此区域勋章不在微博、名片中展示，可点击调整为展示勋章）</div>
+                        </div>
+                        <div class="options_xzWrap">
+                            <ul class="ul_medLs_3 clearfix" node-type="medalOfHidden">
+                                <li action-type="showMedal">
+                                    <div class="img_show" node-type="unitMedal" action-data="mid=433">
+                                        <div class="ico_closeZ">
+                                            <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="img_ls">
+                                            <img
+                                                src="images/433_s.gif" />
+                                        </div>
+                                        <div class="tit_list"><a title="勋章：微身份" href="javascript:void(0);">微身份</a></div>
+                                    </div>
+                                </li>
+                                <li action-type="showMedal">
+                                    <div class="img_show" node-type="unitMedal" action-data="mid=433">
+                                        <div class="ico_closeZ">
+                                            <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="img_ls">
+                                            <img
+                                                src="images/579_s.gif" />
+                                        </div>
+                                        <div class="tit_list"><a title="勋章：达人生日" href="javascript:void(0);">达人生日</a></div>
+                                    </div>
+                                </li>
+                                <li action-type="showMedal">
+                                    <div class="img_show" node-type="unitMedal" action-data="mid=433">
+                                        <div class="ico_closeZ">
+                                            <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="img_ls">
+                                            <img src="images/539_s.gif" />
+                                        </div>
+                                        <div class="tit_list"><a title="勋章：电视迷" href="javascript:void(0);">电视迷</a></div>
+                                    </div>
+                                </li>
+                                <li action-type="showMedal">
+                                    <div class="img_show" node-type="unitMedal" action-data="mid=433">
+                                        <div class="ico_closeZ">
+                                            <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="img_ls">
+                                            <img src="images/543_s.gif" />
+                                        </div>
+                                        <div class="tit_list"><a title="勋章：巨人" href="javascript:void(0);">巨人</a></div>
+                                    </div>
+                                </li>
+                                <li action-type="showMedal">
+                                    <div class="img_show" node-type="unitMedal" action-data="mid=433">
+                                        <div class="ico_closeZ">
+                                            <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="img_ls">
+                                            <img src="images/551_s.gif" />
+                                        </div>
+                                        <div class="tit_list"><a title="勋章：游戏大王" href="javascript:void(0);">游戏大王</a></div>
+                                    </div>
+                                </li>
+                                <li action-type="showMedal">
+                                    <div class="img_show" node-type="unitMedal" action-data="mid=433">
+                                        <div class="ico_closeZ">
+                                            <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="img_ls">
+                                            <img src="images/561_s.gif" />
+                                        </div>
+                                        <div class="tit_list"><a title="勋章：火炬手" href="javascript:void(0);">火炬手</a></div>
+                                    </div>
+                                </li>
+                                <li action-type="showMedal">
+                                    <div class="img_show" node-type="unitMedal" action-data="mid=433">
+                                        <div class="ico_closeZ">
+                                            <a action-type="hiddenMedal" href="javascript:void(0);"></a>
+                                        </div>
+                                        <div class="img_ls">
+                                            <img src="images/571_s.gif" />
+                                        </div>
+                                        <div class="tit_list"><a title="勋章：刘翔粉丝" href="javascript:void(0);">刘翔粉丝</a></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn_szshow">
+                            <a class="btn_greenLg" href="javascript:void(0);" node-type="saveBtn">
+                                <em>保&nbsp;&nbsp;存</em></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

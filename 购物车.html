@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{padding: 0;margin: 0;}
+	#box{width: 1000px;margin: 0 auto;}
+	.con{height: 200px;margin-top: 10px;}
+	.con dl dt{float: left;width: 500px;}
+	.con dl dd{float: left;}
+	.con .rg{float: right;}
+	.con dl dd p{margin-top: 20px;}
+	img{height: 50%;width: 50%}
+	.rg p,.gw{margin-top: 10px;}
+	.rg .gw{width: 40px;height: 30px;}
+	.rg input{width: 15px;height: 15px;}
+	#ft{clear:both;width:900px; height:30px;margin: 0 auto}
+	#ft p{line-height:30px; float:left;}
+	#ft span{float:left; margin-top:5px;}
+	#zj{display:inline-block; width:60px; height:20px; background:#eee;border:1px solid #999;margin-left:3px;}
+	#sum{float: left;width: 40px;height: 20px;border: 1px solid #ccc;}
+	
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div class="con">
+			<dl>
+				<dt><img src="images/4.jpg" alt=""></dt>
+				<dd>
+					<p>￥190元</p>
+					<p>京东超市，物超所值</p>
+				</dd>
+			</dl>
+			<div class="rg">
+				<p>单价：￥<span date="price">150</span></p>
+				<p>数量：<button class="jian">-</button><input type="text" value="1"><button class="jia">+</button></p>
+				<button class="gw">购物</button>
+			</div>
+		</div>
+
+		<div class="con">
+			<dl>
+				<dt><img src="images/2.jpg" alt=""></dt>
+				<dd>
+					<p>￥190元</p>
+					<p>买衬衫，送羊皮皮衣</p>
+				</dd>
+			</dl>
+			<div class="rg">
+				<p>单价：￥<span date="price">140</span></p>
+				<p>数量：<button class="jian">-</button><input type="text"value="1"><button class="jia">+</button></p>
+				<button class="gw">购物</button>
+			</div>
+		</div>
+
+		<footer id="ft">
+			<p>你一准备购买</p><input type="text"id="sum"><p>件商品，总计￥</p><input type="text"id="zj">
+		</footer>
+	</div>
+		
+	<script src="jq/jquery-2.1.1.js"></script>
+	<script>
+	$(function(){
+		var btn1=$(".con").find("button[class=jia]") //+
+		var btn2=$(".con").find("button[class=jian]") //-
+		var sum=$("#sum");
+		var zj=$("#zj");
+		//点击+
+		btn1.on("click",function(){
+			var vall=$(this).prev("input");//获取到input
+			var num=parseInt(vall.val());//在获取到input里边们的值把他转化成整数
+			num++;
+			if(num>10)return  //如果input里面的值大于10的我就让他返回;
+			vall.val(num)
+			zonjia()
+		})
+
+		//点击-
+		btn2.on("click",function(){
+			var vall=$(this).next("input");
+			var num=parseInt(vall.val());
+			num--;
+			if(num<1){
+				vall.val(num=1)
+				if(confirm("您确定要删除吗?")){
+					$(this).parents(".con").remove()
+					change()
+				}
+			}
+			vall.val(num)
+			zonjia()
+		})
+
+		//商品的数量
+		function change(){
+			var len=$("#box").children("div").length;
+			sum.val(len)
+		}
+		change();
+
+		function zonjia(){
+			var paren=$("#box").children("div")
+			var dj=0;
+			var zongjia=0;
+			paren.find("input[type=text]").each(function(){
+				dj=$(this).parents(".rg").find("span[date=price]").text().slice(0)
+				//dj*$(this).val()==单价*数量，然后又加等，算出总价
+				zongjia+=dj*$(this).val();
+				//console.log($(this))
+			})
+			zj.val(zongjia)
+		}
+		zonjia()
+	})
+	</script>
+</body>
+</html>

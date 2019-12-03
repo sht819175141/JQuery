@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;list-style: none;}
+		#box,#box1{width: 330px;height: 120px;margin: 40px auto;border: 3px solid #ccc;position: relative;overflow: hidden;}
+		#box ul,#box1 ul{position: absolute;}
+		#box ul li,#box1 ul li{float: left;width: 330px;height: 120px;}
+		#box ol,#box1 ol{position: absolute;left: 0px;top: 0px;}
+		#box ol li,#box1 ol li{float: left;width:25px;height: 25px;background: blue;border: 1px solid #999;text-align: center;line-height: 25px;color: #fff;font-size: 18px;}
+		#prev1,#prev{left: 10px;position: absolute;top: 50px;height: 35px;width: 20px;background: #ccc;font-size: 30px;cursor:pointer;}
+		{left: 10px;}
+		#next1,#next{right: 10px;position: absolute;top: 50px;height: 35px;width: 20px;background: #ccc;font-size: 30px;cursor: pointer;}
+		#box ol li.bg,#box1 ol li.bg1{background: red}
+	</style>
+</head>
+<body>
+	<div id='box'>
+		<ul>
+			<li><img src="images/1.png" alt=""></li>
+			<li><img src="images/2.png" alt=""></li>
+			<li><img src="images/3.png" alt=""></li>
+			<li><img src="images/6.png" alt=""></li>
+			<li><img src="images/5.png" alt=""></li>
+		</ul>
+		<ol>
+			<li class='bg'>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>	
+		<div id='prev'><</div>
+		<div id='next'>></div>
+	</div>
+	<div id='box1'>
+		<ul>
+			<li><img src="images/1.png" alt=""></li>
+			<li><img src="images/2.png" alt=""></li>
+			<li><img src="images/3.png" alt=""></li>
+			<li><img src="images/6.png" alt=""></li>
+			<li><img src="images/5.png" alt=""></li>
+		</ul>
+		<ol>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>	
+		<div id='prev1'><</div>
+		<div id='next1'>></div>
+	</div>
+	<script src="../jQueryVersion/jquery-1.11.1.js"></script>
+	<script src="../jQueryVersion/插件焦点图.js"></script>
+	<script>
+		$(function(){
+			$('#box ul').tab({
+				'type':'click',
+				'ind':0,
+				'speed':2000,
+				'spe':1000,
+				'prev':'#prev',
+				'next':'#next',
+				'ol':'#box ol li',
+				'dirction':'top',
+				'autoPlay':'true',
+				'timer':'timer',
+				'cN':'bg'
+			})
+			
+			$('#box1 ul').tab({
+				'type':'click',
+				'ind':0,
+				'speed':1000,
+				'spe':600,
+				'prev':'#prev1',
+				'next':'#next1',
+				'ol':'#box1 ol li',
+				'autoPlay':'true',
+				'timer':'time',
+				'cN':'bg1'
+			})
+		})
+	</script>
+</body>
+</html>

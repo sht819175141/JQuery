@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0;height: }
+	#box{
+		width: 400px;
+		margin: 50px auto;
+	}
+	#box dl dt{
+		font-size: 30px;
+		width: 400px;
+		height: 40px;
+		background: #eee;
+		line-height: 40px;
+		border: 1px solid #00f;
+		background:#3496db url(images/bg1.png) no-repeat right center;
+	}
+	#box dl dd{
+		padding: 6px;
+	}
+	#box dl>dt.bg{background:#3496db url(images/bg2.png) no-repeat right center;}
+	</style>
+</head>
+<body>
+	<script src="../../jQueryVersion/jquery-1.11.1.js"></script>
+	<div id="box">
+		<dl>
+			<dt>标题1</dt>
+			<dd>看来就是你发角度看来是；附近的法律设计大赛；反对思考了；发积德累善好的付款了深刻都快精神分裂会计师大后方卡上的爆发力和回复啦是【‘后付款ihnjdkashfkjaisphfkjdashfkldhskas；导航放假哦爱上飞机喀什大奖哦了十分简单来说附件里是附带上；哈佛教授的回复数和；哎是否及时打开了会反击反击机会就</dd>
+		</dl>
+		<dl>
+			<dt>标题2</dt>
+			<dd>看来就是你发角度看来是；附近的法律设计大赛；反对思考了；发积德累善好的付款了深刻都快精神分裂会计师大后方卡上的爆发力和回复啦是【‘后付款ihnjdkashfkjaisphfkjdashfkldhskas；导航放假哦爱上飞机喀什大奖哦了十分简单来说附件里是附带上；哈佛教授的回复数和；哎是否及时打开了会反击反击机会就</dd>
+		</dl>
+		<dl>
+			<dt>标题3</dt>
+			<dd>看来就是你发角度看来是；附近的法律设计大赛；反对思考了；发积德累善好的付款了深刻都快精神分裂会计师大后方卡上的爆发力和回复啦是【‘后付款ihnjdkashfkjaisphfkjdashfkldhskas；导航放假哦爱上飞机喀什大奖哦了十分简单来说附件里是附带上；哈佛教授的回复数和；哎是否及时打开了会反击反击机会就</dd>
+		</dl>
+		<dl>
+			<dt>标题4</dt>
+			<dd>看来就是你发角度看来是；附近的法律设计大赛；反对思考了；发积德累善好的付款了深刻都快精神分裂会计师大后方卡上的爆发力和回复啦是【‘后付款ihnjdkashfkjaisphfkjdashfkldhskas；导航放假哦爱上飞机喀什大奖哦了十分简单来说附件里是附带上；哈佛教授的回复数和；哎是否及时打开了会反击反击机会就</dd>
+		</dl>
+		<dl>
+			<dt>标题5</dt>
+			<dd>看来就是你发角度看来是；附近的法律设计大赛；反对思考了；发积德累善好的付款了深刻都快精神分裂会计师大后方卡上的爆发力和回复啦是【‘后付款ihnjdkashfkjaisphfkjdashfkldhskas；导航放假哦爱上飞机喀什大奖哦了十分简单来说附件里是附带上；哈佛教授的回复数和；哎是否及时打开了会反击反击机会就</dd>
+		</dl>
+	</div>
+	<script>
+	$(document).ready(function(){
+		$("#box dl>dd").hide();
+		$("#box dl>dt").on("click",function(){
+			$(this).next().slideDown(1000);
+			$(this).parent("dl").siblings().children("dd").slideUp(1000);
+			$(this).addClass("bg");
+			$(this).parent("dl").siblings().children("dt").removeClass("bg");
+		})
+	})
+	</script>
+</body>
+</html>

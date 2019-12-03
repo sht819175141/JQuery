@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0;}
+	#one{width: 800px;margin-left: 280px;}
+	#one ul li{list-style: none;text-align: center;width: 800px;font-weight: bold;font-size: 80px;color: #fff;}
+	#two{width: 300px;height: 300px;position: fixed;right:10px;bottom: 50px;display: none;}
+	#two ol{float: right;width: 100px;height: 300px;}
+	#two ol li{list-style: none;width: 100px;height: 40px;background: #ff6;margin-top: 5px;line-height: 40px;text-align: center;}
+	#two ol p{width: 100px;height: 40px;background: #ff6;margin-top: 5px;line-height: 40px;text-align: center;}
+	#box .oli{width:255px;background: blue;color: #fff;font-weight: bold;font-size: 20px;}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.js"></script>
+	<div id="box">
+		<div id="one">
+			<ul>
+				<li style="height: 900px;line-height: 
+				900px;background:red">F1</li>
+				<li style="height: 700px;line-height: 
+				700px;background:blue">F2</li>
+				<li style="height: 600px;line-height: 600px;background:#00ff00">F3</li>
+				<li style="height: 1000px;line-height: 1000px;background:yellow">F4</li>
+				<li style="height: 500px;line-height: 
+				500px;background:#ccc">F5</li>
+				<li style="height: 800px;line-height: 
+				800px;background:green">F6</li>
+			</ul>
+		</div>
+		<div id="two">
+			<ol>
+				<li>一楼</li>
+				<li>二楼</li>
+				<li>三楼</li>
+				<li>四楼</li>
+				<li>五楼</li>
+				<li>六楼</li>
+				<p>直达楼顶</p>
+			</ol>
+		</div>
+	</div>
+	<script>
+	$(document).ready(function(){
+		var arr=[];
+		//遍历每一张图片
+		$("#one li").each(function(){
+			var hei=$(this).offset().top;
+			//把他们的高添加进一个数组
+			arr.push(hei)
+		})
+		//console.log(arr)
+		$(window).on("scroll",function(){
+			var scr=$(this).scrollTop();
+			if(scr>300){
+				$("#two").show()
+				$.each(arr,function(i,val){
+					if(scr>=val){
+						$("#two li").eq(i).addClass("oli").siblings().removeClass("oli");
+						$("#two li").eq(i).stop().animate({"marginLeft":-150}).siblings().stop().animate({"marginLeft":0})
+					}
+				})
+
+				$("#two p").on("click",function(){
+					$("body").stop().animate({"scrollTop":0})
+				})
+
+				$("#two li").on("click",function(){
+					var ind=$(this).index();
+					$("body").stop().animate({"scrollTop":arr[ind]})
+				})
+
+			}else{
+				$("#two").hide();
+			}
+		})
+		
+			
+	})			
+	</script>
+</body>
+</html>

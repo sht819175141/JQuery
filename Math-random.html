@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//获取范围内的随机数
+		function randNum(minnum , maxnum){
+		    return Math.floor(minnum + Math.random() * (maxnum - minnum));
+		}
+		//例如，生成0-9的随机数(包括0和9)randNum(0,10)
+
+		//冒泡排序
+		for(var x=0;x<abb.length;x++){
+			for(var y=x+1;y<abb.length;y++){
+				if(abb[x]>abb[y]){
+					num=abb[x];
+					abb[x]=abb[y];
+					abb[y]=num;
+				}
+			}
+		}
+
+		//随机生成1--100中间的数字，去重，选出最大，最小
+		function random(){			
+			var arr=[];
+			for(var i=0;i<10;i++){
+				var random=Math.floor(Math.random()*100+1);
+				if(arr.indexOf(random)==-1){
+					arr.push(random)
+				}
+			}
+		var arr=arr.sort(function(a,b){
+			return a-b;
+			})
+			
+			return "数组是"+arr+"最小值是"+arr[0]+"最大值是"+arr[arr.length-1]
+
+
+	</script>
+</body>
+</html>

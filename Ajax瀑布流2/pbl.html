@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9.22 瀑布流</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #box img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'get',
+            url: 'move.json',
+            async: true,
+            datatype: 'json',
+            success: function (result) {
+                var str = '';
+                $.each(result.date, function (i, val) {
+                    str += "<img src=" + val.src + " />"
+                    //console.log(str);
+                })
+                $('#box').html(str);
+
+                var w = $('#box img').width() + 20;
+                var count = Math.floor($(window).width() / w);
+                $('#box').width(w * count);
+                var arrH = [];
+                var p = 0;
+
+                function info(str, len) {
+                    for (var i = str; i < len; i++) {
+                        if (i < count) {
+                            arrH.push(0);
+                        }
+                        var minH = Math.min.apply(Math, arrH);
+                        var minind = $.inArray(minH, arrH);
+                        var h = $('#box img').eq(i).height() + 20;
+                        arrH[minind] += h;
+                        $('#box img').eq(i).stop().animate({'left': minind * w, 'top': minH}, 1000);
+                        p++;
+                    }
+                }
+
+                info(0, $('#box img').length);
+
+                function randerimg() {
+                    var maxH = Math.max.apply(Math, arrH);
+                    var maxind = $.inArray(maxH, arrH);
+                    $.each(result.date, function (i, val) {
+                        $('<img>').attr("src", val.src).css({'left': maxind * w, 'top': maxH}).appendTo($('#box'));
+                    })
+                    info(p, $('#box img').length);
+                }
+
+                //鼠标向下滚动，继续加载
+                $(window).on('scroll', function () {
+                    var pageH = $(document).height() - $(this).height();
+                    if ($(window).scrollTop() >= pageH) {
+                        randerimg();
+                    }
+                })
+            }
+        })
+    })
+</script>
+</body>
+</html>

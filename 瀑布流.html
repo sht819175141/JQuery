@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>	
+		.wrap{margin:0 auto;position: relative;}
+		.wrap img{position: absolute;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<img src="img/temp_img01.jpg">
+		<img src="img/temp_img02.jpg">
+		<img src="img/temp_img03.jpg">
+		<img src="img/temp_img04.jpg">
+		<img src="img/temp_img05.jpg">
+		<img src="img/temp_img06.jpg">
+		<!-- <img src="img/temp_img07.jpg">
+		<img src="img/temp_img08.jpg">
+		<img src="img/temp_img09.jpg">
+		<img src="img/temp_img10.jpg">
+		<img src="img/temp_img11.jpg">
+		<img src="img/temp_img12.jpg">
+		<img src="img/temp_img13.jpg"> -->
+	</div>
+	<script src="jquery-1.11.1.js"></script>
+	<script>
+		$(function(){
+			
+			var w=$(".wrap img").width()+20;
+			var colum=Math.floor($(window).width()/w);
+			$(".wrap").width(w*colum)
+			//console.log(colum)
+			var p=0;
+			var arrH=[];
+			function int(start,len){
+				for(var i=start;i<len;i++){
+					if(i<4){
+						arrH.push(0);
+					}
+					var minH=Math.min.apply(Math,arrH);
+					var minid=$.inArray(minH,arrH);
+					var gao=$(".wrap img").eq(i).height()+20;
+					arrH[minid]+=gao;
+					$(".wrap img").eq(i).stop().animate({"left":w*minid,"top":minH},2000);
+					p++;
+				}
+			}
+			int(0,$(".wrap img").length);
+
+			function randerimg(){
+				var dataing={"data":[
+					{"src":"img/temp_img01.jpg"},
+					{"src":"img/temp_img02.jpg"},
+					{"src":"img/temp_img03.jpg"},
+					{"src":"img/temp_img04.jpg"},
+					{"src":"img/temp_img05.jpg"},
+					{"src":"img/temp_img06.jpg"},
+					{"src":"img/temp_img07.jpg"},
+					{"src":"img/temp_img08.jpg"},
+					{"src":"img/temp_img09.jpg"},
+					{"src":"img/temp_img10.jpg"},
+					{"src":"img/temp_img11.jpg"},
+					{"src":"img/temp_img12.jpg"},
+					{"src":"img/temp_img13.jpg"}
+				]}
+				
+				int(p,$(".wrap img").length);
+				
+				var maxH=Math.max.apply(Math,arrH);
+				var maxid=$.inArray(maxH,arrH);
+				$.each(dataing.data,function(i,val){
+					$("<img>").attr("src",val.src).css({"left":maxid*w,"top":maxH}).appendTo(".wrap")
+				})
+				
+			}
+
+			$(window).on("scroll",function(){
+				var  docH=$(document).height()-$(window).height();
+				if($(window).scrollTop()>=docH){
+					randerimg();
+				}
+			})
+		})
+			/*var cha=$(document).height();
+			console.log(cha-$(window).height())
+			console.log($(document).scrollTop())	深刻理解滚动条*/
+	</script>
+</body>
+</html>

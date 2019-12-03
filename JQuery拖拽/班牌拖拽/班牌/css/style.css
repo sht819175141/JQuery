@@ -1,0 +1,124 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+.draggable {
+
+  width: 100px;
+  height: 100px;
+  line-height: 50px;
+  min-height: 10px;
+  min-width: 10px;
+  margin: 0px;
+  position: absolute;
+  padding: 1px;
+  left: 0px;
+  right: 0px;
+  background-color: #234b5e;
+
+  color: white;
+
+  border-radius: 0px;
+  padding: 0px;
+  float: left;
+  margin: 0px;
+
+  overflow: hidden;
+  opacity: 0.8;
+
+}
+
+h4 {
+  text-align: center;
+  vertical-align: middle;
+}
+
+p.wh {
+  font-size: 8px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  line-height: 8px;
+  padding: 2px;
+}
+
+p.lt {
+  font-size: 8px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  line-height: 8px;
+  padding: 2px;
+}
+
+p.close {
+  font-size: 8px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  line-height: 8px;
+  padding: 2px;
+
+  cursor: pointer;
+  display: none;
+}
+
+.content {
+  border: 1px solid #ccc;
+  width: 1000px;
+  height: 600px;
+  position: relative;
+  margin: 0px auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.left {
+  background: #84acb3;
+  float: left;
+  width: 160px;
+  height: 100%;
+}
+
+.right {
+  background: #fff;
+  float: right;
+  width: 840px;
+  height: 100%;
+  position: relative;
+
+}
+
+.drag_l {
+
+  background-color: #234b5e;
+  border-radius: 11px;
+  color: #f7ebca;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 6px;
+  padding: 8px;
+  width: 128px;
+  text-align: center;
+
+}
+
+.drag_l:hover {
+  background-color: #577a8b;
+}
+
+pre {
+  color: green;
+  padding: 10px 15px;
+  background: #f0f0f0;
+  border: 1px dotted #333;
+  font: 12px/1.5 Courier New;
+  margin: 12px;
+}
+
+span {
+  color: #999;
+}

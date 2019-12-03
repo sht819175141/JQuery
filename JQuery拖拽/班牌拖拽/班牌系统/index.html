@@ -1,0 +1,98 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta charset="UTF-8">  
+    <title></title>  
+    <style type="text/css">  
+        #box{width: 160px; height: 160px; position: absolute; left: 40%; top: 200px; background: aquamarine;border: 10px solid aqua; box-sizing: border-box;}  
+    </style>  
+</head>  
+<body>  
+    <div id="box"></div>  
+    <script type="text/javascript">  
+    //页面加载完毕后执行页面右边的函数    
+    window.onload=function (){  
+        //通过ID找到元素 并且将它赋值给 变量oBox   
+        var oBox=document.getElementById('box');  
+        //声明X 代表以后要存储的数据类型是字符串 Y同上  
+        var X='';  
+        var Y='';  
+        //当鼠标点击盒子的时候触发 执行右边的函数   ev形参  向浏览器返回当前值 FireFox火狐 Chrome谷歌默认都是有一个值传进来的  
+        oBox.onmousedown=function (ev){  
+            //兼容IE和FireFox Chrome 只要一个为真就可以执行  
+            var iEvent=ev || event;  
+            //将盒子点击时获取的宽度赋值给W  
+            var W=oBox.offsetWidth;  
+            //将盒子点击时获取的宽度赋值给H  
+            var H=oBox.offsetHeight;  
+            //将盒子点击时获取的鼠标X轴的值赋值给disX  
+            var disX=iEvent.clientX;  
+            //将盒子点击时获取的鼠标Y轴的值赋值给disY  
+            var disY=iEvent.clientY;  
+            //将盒子的鼠标点击时的距离左边的距离和盒子的宽度总和 赋值给disW  
+            var disxW=oBox.offsetLeft+W;  
+            //将盒子的鼠标点击时的距离头部的距离和盒子的高度总和 赋值给dis  
+            var disyH=oBox.offsetTop+H;  
+              
+            //这是判断是否当前点击的是盒子的四周  
+            //当盒子当前点击X轴的值大于 盒子的距离左边的值加盒子自身的宽度减去10像素时  就是表示已经点击到了盒子的右边框  
+            if(iEvent.clientX>oBox.offsetLeft+oBox.offsetWidth-10){  
+                //alert('碰到了盒子的右边！');  
+                //赋予上面X的值这时等于right  好用于下面的对比  
+                X='right';  
+                oBox.style.cursor='e-resize';  
+            }  
+            //当盒子当前点击X轴的值小于 盒子的距离左边的值10像素时  就是表示已经点击到了盒子的左边框   
+            else if(iEvent.clientX<oBox.offsetLeft+10){  
+                //alert('碰到了盒子的左边！');  
+                //赋予上面X的值这时等于left  好用于下面的对比  
+                X='left';  
+                oBox.style.cursor='e-resize';  
+            }  
+            //底端判断和顶部判断同上  
+            else if(iEvent.clientY>oBox.offsetTop+oBox.offsetHeight-10){  
+                //alert('你碰到了盒子的底部！');  
+                Y='bottom';  
+                oBox.style.cursor='s-resize';  
+            }  
+            else if(iEvent.clientY<oBox.offsetTop+10){  
+                //alert('你碰到了盒子的顶部！');  
+                Y='top';  
+                oBox.style.cursor='s-resize';  
+            }  
+              
+            //当鼠标每移动一个像素点之时 触发 执行右边的函数  在事件前加document 是为了加大事件的作用域 移动时对整个页面文档有效   
+            document.onmousemove=function (ev){  
+                var iEvent=ev || event; //当当前的鼠标值减去之前获取的鼠标值为正数 那么正数加正数是增大  
+                if (X=='right') {       //当当前的鼠标值减去之前获取的鼠标值为负数 那么正数加负数是变小  
+                    oBox.style.width=W+(iEvent.clientX-disX)+'px';  
+                }                       //当当前的鼠标值减去之前获取的鼠标值为负数 那么正数减负数是负负得正 增大  
+                if(X=='left'){      //当当前的鼠标值减去之前获取的鼠标值为正数 那么正数减正数数是缩小  
+                    oBox.style.width=W-(iEvent.clientX-disX)+'px';  
+                    //需要修复的bug是左边拖动的时候 光改变宽度 盒子距离左边的值是不变的 这时候特殊的一点是需要改变盒子距离左边的值  
+                    //这时我是这样得到盒子在拖动过程中距离左边的值的 通过鼠标点击时 就获取盒子当前距离左边的值加盒子的宽度 然后在这里需要的时候    
+                    //换个比喻来说就是 12=5+7  12是盒子的距离左边的值5 加上盒子的宽度 7 得到的    这个时候我们得到了盒子的 距离左边的值和盒子的宽度  
+                    //很明显 我们直接用 盒子距离左边的值减去已知盒子的宽度 (这时候盒子的宽度是变化的 )那么就可以得到盒子距离左边的距离值.最后记得加上像素  
+                    oBox.style.left=disxW-oBox.offsetWidth+'px';  
+                      
+                }  
+                //顶部  和底端的拖动同上  同理可得  
+                if(Y=='bottom'){  
+                    oBox.style.height=H+(iEvent.clientY-disY)+'px';  
+                }  
+                if(Y=='top'){  
+                    oBox.style.height=H-(iEvent.clientY-disY)+'px';  
+                    oBox.style.top=disyH-oBox.offsetHeight+'px';  
+                }  
+            };  
+            //当拖动结束后 我们需要释放鼠标 添加鼠标按下松开事件 onmouseup 让鼠标点击不松 的事件为空 让鼠标每移动  
+            document.onmouseup=function (){  
+                document.onmousedown=null;  
+                document.onmousemove=null;//一像素的触发的事件为空   
+            }  
+        };  
+  
+    };  
+</script>
+</body>  
+</html> 

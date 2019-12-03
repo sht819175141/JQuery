@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="btn1">报名</button>
+  <script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+  <script>
+    var startTime = "2017-08-07 12:00";
+    var endTime = "2018-01-05 12:00";
+    var start = new Date(startTime.replace("-", "/").replace("-", "/"));
+    var end = new Date(endTime.replace("-", "/").replace("-", "/"));
+
+    $(".btn1").on("click", function() {
+      var currentTime = (new Date().Format("yyyy-MM-dd hh:mm"));
+      var current = new Date(currentTime.replace("-", "/").replace("-", "/"));
+
+      if (current > start && current < end) {
+        return false;
+      } else {
+        $(this).attr("disabled", true);
+        $(this).css("background","#0f0");
+      }
+    })
+
+
+    Date.prototype.Format = function(fmt) { //author: meizz
+      var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+      };
+      if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+      return fmt;
+    }
+  </script>
+</body>
+
+</html>

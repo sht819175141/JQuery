@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#box{margin:50px auto; position:relative; width:756px;height: 164px;overflow: hidden;}
+		#box ul{width: 2250px;}
+		li{list-style: none;float: left;}
+		#left{position: absolute;left:10px;top:60px;}
+		#right{position: absolute;right:10px;top:60px;}
+	</style>
+</head>
+<body>
+	<script src="../jQueryVersion/jquery-1.8.3.js"></script>
+	<div id="box">
+		<ul>
+			<li><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+			<li><img src="img/6.jpg" alt=""></li>
+			<li><img src="img/7.jpg" alt=""></li>
+			<li><img src="img/8.jpg" alt=""></li>
+			<li><img src="img/9.jpg" alt=""></li>
+		</ul>
+		<ol>
+			<li id="left"><img src="img/l.png" alt=""></li>
+			<li id="right"><img src="img/r.png" alt=""></li>
+		</ol>
+	</div>
+	<script>
+		$(document).ready(function(){
+			var w=$("#box>ul>li").eq(0).outerWidth();
+			//width:取得第一个匹配元素当前计算的宽度值(本身宽度)
+			//outWidth:获取第一个匹配元素外部宽度(本身宽度+padding+border)
+			//innerWidth:获取第一个匹配元素内部区域宽度(本身宽度+padding)
+			//outWidth(true):本身宽带+padding+border+margin;
+			var len=$("#box>ul>li").length; 
+			var sum=3;  //我让他一次播3张;
+			$("#box>ul").width(w*len);  //ul的总宽为1500; 
+
+			//左键
+			$("#left").on("click",function(){
+				$("#box>ul").css("marginLeft",-w*sum); //-750
+				$("#box>ul>li").slice(len-sum).prependTo($("#box>ul"));
+				$("#box>ul").stop().animate({"marginLeft":0})
+			})
+
+			//右键.
+			$("#right").on("click",function(){
+				$("#box>ul").stop().animate({"marginLeft":-w*sum},function(){ //-		250*3=750;那么也就是说我一次就走-750px;
+					$("#box>ul li").slice(0,sum).appendTo($("#box>ul")); //我截取了3张
+					$("#box>ul").css("marginLeft",0); //最后我它返回原来的值
+				})
+			})	
+		})
+	</script>
+</body>
+</html>

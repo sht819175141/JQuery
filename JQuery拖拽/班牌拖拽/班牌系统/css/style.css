@@ -1,0 +1,36 @@
+html,body{
+	width: 100%;
+	height: 100%;
+}
+.wrap{
+	height: 100%;
+	width: 100%;
+}
+.module_list{
+	width: 10%;
+	height: 100%;
+	border: 1px solid #ccc;
+	float: left;
+	overflow: auto;
+}
+.con_list{
+	width: 90%;
+	border: 1px solid #ccc;
+	height: 100%;
+	float: right;
+	background: lightgreen;
+}
+.item{
+	width: 150px;
+	height: 150px;
+	background: #ccc;
+	margin: 10px auto;
+	border: 1px solid #ccc;
+	text-align: center;
+	line-height: 150px;
+}
+
+.uls{float: right;}
+.uls li{list-style: none;padding: 10px 13px;float: left;}
+.li2{background: url(../images/tool.png) no-repeat -60px -29px;cursor: pointer;}
+.li4{background: url(../images/tool.png) no-repeat -89px -29px;cursor: pointer;}

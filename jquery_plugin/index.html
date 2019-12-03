@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+            div {
+                margin-bottom: 15px;
+                font-family: verdana;
+                font-size: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="test1"></div>
+        <div id="test2" class="myShit"></div>
+        <div id="test3" class="myShit"></div>
+        <script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+        <script src="plugin.js"></script>
+        <script>
+            ;(function ($, window, document, undefined) {
+                var testPlugin = {
+
+                    // this is your plugin defaults. you're not required to provide it.
+                    _defaults: {
+                        value: 0
+                    },
+
+                    // this is your plugin initialization. you're not required to provide it.
+                    init: function () {
+                        // Plugin initialization... this is private! (or protected, if you wish)
+                        // Also note that you're not required to provide a init method!
+                        this.$element.append('initialized plugin ' + this._name +
+                            ' for element-id ' + this.element.id +
+                            ' with value ' + this.options.value + '<br/>');
+                    },
+
+                    // this is your plugin action. implement it as you wish/need/want.
+                    doSomething: function (text) {
+                        // Public plugin action... the user can call this!
+                        this.$element.append('did something with ' + text +
+                            ' using plugin ' + this._name +
+                            ' for element-id ' + this.element.id + '<br/>');
+                    },
+
+                    // This one is private. the user will not be able to call it!
+                    _myPrivateMethod: function () {},
+
+                    // this is your plugin "destructor", but you're not required to provide it.
+                    _destroy: function () {
+                        // This one is a bonus!
+                        // Here you can provide the code to actually "destroy" your plugin.
+                        // This will be called whenever the user calls your plugin with
+                        // the "destroy" method.
+                        this.$element.append('destroyed!<br/>');
+                    }
+                }
+                //
+                // Creates a new plugin called "myPlugin",
+                // which implements the "testPlugin" definitions above.
+                $.createPlugin('myPlugin', testPlugin);
+                //
+                // Now we just use "myPlugin" as any regular jQuery plugin...
+                // The plugin initialization is called just once,
+                // "automagically" on your first plugin call,
+                // for each element that matches the specified selector.
+                $('#test1')
+                    .myPlugin({
+                        value: 1
+                    })
+                    .myPlugin('doSomething', 'my balls')
+                    .myPlugin('doSomething', 'your butt-hole');
+                //
+                $('.myShit')
+                    .myPlugin('doSomething', 'my balls')
+                    .myPlugin('doSomething', 'your butt-hole');
+                //
+                // if we call "destroy", we'll be able to call the plugin initialization again.
+                $('#test1').myPlugin({
+                    value: 2
+                }); // This line does nothing!!
+                $('#test1').myPlugin('destroy'); // This line destroys the plugin instance.
+                $('#test1').myPlugin({
+                    value: 3
+                }); // And this one creates a new one.
+            })(jQuery, window, document);
+        </script>
+    </body>
+
+</html>

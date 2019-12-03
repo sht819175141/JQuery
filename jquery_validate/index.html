@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jQuery Validate 插件 - 自定义方法和消息显示</title>
+
+    <link rel="stylesheet" media="screen" href="http://static.runoob.com/assets/jquery-validation-1.14.0/demo/css/screen.css">
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+
+
+    <style type="text/css">
+        form.cmxform {
+            width: 50em;
+        }
+
+        em.error {
+            background: url("/try/jquery/plugins/images/unchecked.gif") no-repeat 0px 0px;
+            padding-left: 16px;
+        }
+
+        em.success {
+            background: url("/try/jquery/plugins/images/checked.gif") no-repeat 0px 0px;
+            padding-left: 16px;
+        }
+
+        form.cmxform label.error {
+            margin-left: auto;
+            width: 250px;
+        }
+
+        em.error {
+            color: black;
+        }
+
+        #warning {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="main">
+
+        <form class="cmxform" id="texttests" method="get" action="foo.html">
+            <h2 id="summary"></h2>
+
+            <fieldset>
+                <legend>自定义方法和错误消息显示</legend>
+                <table>
+                    <tr>
+                        <td><label for="number">文本框</label></td>
+                        <td><input id="number" name="number" title="请输入至少 3 个但不超过 15 个字符！" />
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label for="secret">密钥</label></td>
+                        <td><input name="secret" id="secret" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><label for="math">7 + 4 = </label></td>
+                        <td><input id="math" name="math" title="请输入正确的结果！" /></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <input class="submit" type="submit" value="提交" />
+            </fieldset>
+        </form>
+
+        <h3 id="warning">您的表单包含大量的错误！请重新输入。</h3>
+
+    </div>
+
+    <script type="text/javascript">
+        // 扩展当前规则为一个新规则
+
+        // 新规则要求输入文本 "buga"，我们也可以定义一个默认的消息
+        $.validator.addMethod("buga", function(value) {
+            return value == "buga";
+        }, '请输入 "buga"！');
+
+        // 新规则要求值必须与第一个参数相同
+        $.validator.methods.equal = function(value, element, param) {
+            return value == param;
+        };
+
+        $().ready(function() {
+            var validator = $("#texttests").bind("invalid-form.validate", function() {
+                $("#summary").html("您的表单包含 " + validator.numberOfInvalids() + " 错误，请查看下面的细节。");
+            }).validate({
+                debug: true,
+                errorElement: "em",
+                errorContainer: $("#warning, #summary"),
+                errorPlacement: function(error, element) {
+                    error.appendTo(element.parent("td").next("td"));
+                },
+                success: function(label) {
+                    label.text("ok!").addClass("success");
+                },
+                rules: {
+                    number: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 15,
+                        number: true
+                    },
+                    secret: "buga",
+                    math: {
+                        equal: 11
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

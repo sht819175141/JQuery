@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function createXHR() {
+		    if (typeof XMLHttpRequest != 'undefined') {
+		        return new XMLHttpRequest();
+		    } else if (typeof ActiveXObject != 'undefined') { // 兼容ie7以下浏览器
+		        var version = [
+                    'MSXML2.XMLHttp.6.0',
+                    'MSXML2.XMLHttp.3.0',
+                    'MSXML2.XMLHttp'
+		        ];
+		        for (var i = 0; version.length; i ++) {
+		            try {
+		                return new ActiveXObject(version[i]);
+		            } catch (e) {
+		                //跳过
+		            }   
+		        }
+		    } else {
+		        throw new Error('您的系统或浏览器不支持XHR对象！');
+		    }
+		}
+		function params(data) {
+		    var arr = [];
+		    for (var i in data) {
+		        arr.push(encodeURIComponent(i) + '=' + encodeURIComponent(data[i]));  //编码以解决乱码问题
+		    }
+		    return arr.join('&');
+		}
+		function ajax(obj) {
+		    var xhr = createXHR();    /*创建XHR对象*/
+		    obj.url = obj.url + '?rand=' + Math.random();
+		    obj.data = params(obj.data);
+		    if (obj.method === 'get') obj.url += obj.url.indexOf('?') == -1 ? '?' + obj.data : '&' + obj.data;  //根据url中是否已存在'?'决定参数的连接符号
+		    if (obj.async === true) { //异步方式
+		        xhr.onreadystatechange = function () {
+		            if (xhr.readyState == 4) { //完成请求
+		                callback();
+		            }
+		        };
+		    }
+		    xhr.open(obj.method, obj.url, obj.async);   //open方法启动一个请求
+		    if (obj.method === 'post') {
+		        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); //修改请求头信息模拟表单提交
+		        xhr.send(obj.data);  // send方法发送请求  
+		    } else {
+		        xhr.send(null);
+		    }
+		    if (obj.async === false) { // 同步方式
+		        callback();
+		    }
+		    function callback() {
+		        if (xhr.status == 200) {  // 服务器成功返回
+		            obj.success(xhr.responseText);          //回调传递参数
+		        } else {
+		            alert('获取数据错误！错误代号：' + xhr.status + '，错误信息：' + xhr.statusText);
+		        }   
+		    }
+		}
+	</script>
+</body>
+</html>

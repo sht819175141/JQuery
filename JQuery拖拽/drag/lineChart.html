@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <ul class="list">
+        <li draggable="true">数据1</li>
+        <li draggable="true">数据2</li>
+        <li draggable="true">数据3</li>
+        <li draggable="true">数据4</li>
+        <li draggable="false">数据4</li>
+    </ul>
+    <div class="canvasDom">
+        <canvas id="painter" height="500" width="700"></canvas>
+    </div>
+</div>
+<script src="jquery.js"></script>
+<script>
+    let data =[[20,-73],[40,-86],[60,-81],[80,-168],[100,-141],[120,-150],[140,-101],[160,-35],[180,-156],[200,-22],[220,-29],[240,-34],[260,-52],[280,-76],[300,-191],[320,-80],[340,-45],[360,-111],[380,-172],[400,-131]];
+    let data2 = [[20,-199],[40,-43],[60,-39],[80,-110],[100,-177],[120,-30],[140,-3],[160,-46],[180,-200],[200,-104],[220,-195],[240,-160],[260,-109],[280,-57],[300,-90],[320,-112],[340,-70],[360,-90],[380,-46],[400,-152]];
+    //draw(data);
+
+    function draw(data) {
+        let canvas = document.querySelector("#painter");
+        let cvs = canvas.getContext('2d');
+
+        let w = $('.canvasDom').width();
+        $(canvas).attr('width',w);
+
+        cvs.translate(100,400);
+        //x轴
+        cvs.beginPath();
+        cvs.moveTo(0,0);
+        cvs.lineTo(500,0);
+        cvs.strokeStyle = 'purple';
+        cvs.stroke();
+        cvs.closePath();
+        //y轴
+        cvs.beginPath();
+        cvs.moveTo(0,0);
+        cvs.lineTo(0,-350);
+        cvs.strokeStyle = 'purple';
+        cvs.stroke();
+        cvs.closePath();
+        //绘制折线
+        let i=0;
+        let timer = setInterval(function () {
+            cvs.clearRect(0,0,500,-400);
+            cvs.beginPath();
+            cvs.moveTo(0,0);
+            data.forEach(function (value,index) {
+                cvs.lineTo(value[0]*i/200,value[1])
+            });
+            cvs.stroke();
+            i++;
+
+            if(i>=200){
+                clearInterval(timer)
+            }
+        },1000/60);
+        
+        cvs.beginPath();
+        cvs.moveTo(0,0);
+        data.forEach(function (value,index) {
+            cvs.lineTo(value[0],value[1])
+        });
+        cvs.stroke();
+
+    }
+
+    //拖拽
+    $('.list li').eq(0)[0].ondragstart=function (e) {
+
+        e.dataTransfer.setData("data",JSON.stringify(data));
+
+    };
+
+    $('.list li').eq(1)[0].ondragstart=function (e) {
+
+        e.dataTransfer.setData("data",JSON.stringify(data2));
+
+    };
+
+    //这里必须阻止默认行为，否则监听不到drop事件
+    $('.canvasDom')[0].ondragover = function (e) {
+        e.preventDefault();
+    };
+
+    $('.canvasDom')[0].ondrop=function test(e) {
+        let data = e.dataTransfer.getData("data");
+        draw(JSON.parse(data))
+    }
+
+</script>
+</body>
+</html>

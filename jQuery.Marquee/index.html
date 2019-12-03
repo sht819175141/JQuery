@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 10px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .marquee {
+            width: 300px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background: black;
+            color: rgb(202, 255, 195);
+        }
+    </style>
+</head>
+
+<body>
+    <div class='marquee'>Longer text lorem ipsum dolor sit amet, consectetur adipiscing elit END.</div>
+    <script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+    <script src="jquery.marquee.js"></script>
+    <script>
+        $(function() {
+            $('.marquee').marquee({
+                //时间在milliseconds的跑马灯
+                duration: 15000,
+                //之间的代码在像素的差距
+                gap: 50,
+                //在开始动画前几毫秒的时间。
+                delayBeforeStart: 0,
+                direction: 'left',
+                //真或假-字幕应该被复制以显示连续流动的效果。
+                duplicated: true
+            });
+        });
+    </script>
+</body>
+
+</html>

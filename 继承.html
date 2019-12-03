@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!--继承的三种方式-->
+	<script type="text/javascript">
+		//一、原型链继承
+		/*function Person(name,age){  
+	        this.name=name;  
+	        this.age=age;  
+	    }  
+	    Person.prototype={
+	    	say:function(){
+	    		 alert("使用原型得到Name："+this.name);  
+	    	}
+	    }  
+	    var per=new Person("马小倩",21);  
+	    per.say();
+	      
+	    function Student(){}   
+	 
+	   	Student.prototype=new Person("洪如彤",21);
+		
+		Student.prototype.age=5;
+
+	    Student.prototype.intr=function(){  
+	        alert(this.age);  
+	    }
+
+	    var stu=new Student();
+	    stu.say();//输出：使用原型得到Name:洪如彤  
+	    stu.intr();//输出：5 */
+
+	    // call()  apply()继承
+	    /*function  Person(name,age,love){  
+	        this.name=name;  
+	        this.age=age;  
+	        this.love=love;  
+	        this.say=function say(){  
+	            alert("姓名："+name);  
+	        }  
+	    }  
+
+	    //call方式  
+	    function student(name,age){  
+	        Person.call(this,name,age);  
+	    }  
+
+	    //apply方式  
+	    function teacher(name,love){  
+	        Person.apply(this,[name,love]);  
+	        //Person.apply(this,arguments); //跟上句一样的效果，arguments  
+	    }  
+
+	    //call与aplly的异同：  
+	    //1,第一个参数this都一样,指当前对象  
+	    //2,第二个参数不一样：call的是一个个的参数列表；apply的是一个数组（arguments也可以）  
+
+	    var per=new Person("武凤楼",25,"魏荧屏"); //输出：“武凤楼”  
+	    per.say();  
+	    var stu=new student("曹玉",18);//输出：“曹玉”  
+	    stu.say();  
+	    var tea=new teacher("秦杰",16);//输出：“秦杰”  
+	    tea.say(); */ 
+
+	    //class继承
+	    /*class Parent{
+			  constructor(name,age) {
+			    this.name = name;
+			    this.age = age;
+			  }
+			  show() {
+			    return this.name + ',年纪:' +this.age;
+			  }
+		}
+		/*let parent=new Parent("常海涛",25);
+		console.log(parent.show());*/
+
+		/*class Child extends Parent {
+		  	constructor(x, y, color) {
+			    super(x, y);
+			    this.color = color;
+			}
+		  	to() {
+		    	return this.color + "渲染"// 调用父类的toString()
+			}
+		}
+		let child=new Child(1,2,'red');
+
+		console.log(child.show());
+		console.log(child.to());*/
+
+	</script>	
+</body>
+</html>

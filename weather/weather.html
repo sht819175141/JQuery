@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="js/jquery.min.js"></script>
+  <script>
+    /**
+     * 定位当前城市
+     */
+    function locationInit() {
+      $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', function(_result) {
+        if (remote_ip_info.ret == '1') {
+          cityName = remote_ip_info.province;
+          //console.log(cityName)
+          $("#cityName").html(cityName);
+        }
+      });
+    }
+
+    /**
+     * 根据城市获得天气
+     */
+    function cityWeatherInit() {
+      //跨域是浏览器的安全策略.
+      //jQuery 解决的方式.
+      var relName = getCookie('ccity');
+      if (relName == null) {
+        locationInit()
+        relName = $("#cityName").html();
+      }
+      $("#cityName").html(relName);
+      var todayimg = '';
+      var tomorrowimg = '';
+      $.ajax({
+        url: "http://api.map.baidu.com/telematics/v3/weather",
+        type: "get",
+        data: {
+          location: relName,
+          output: 'json',
+          ak: '6tYzTvGZSOpYB5Oc2YGGOKt8'
+        },
+        /*预期服务器端返回的数据类型，假设现在跨域了，就改成jsonp 就可以了 */
+        dataType: "jsonp",
+        success: function(data) {
+          console.log(data)
+          var weatherData = data.results[0].weather_data;
+          //  console.log(weatherData)
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

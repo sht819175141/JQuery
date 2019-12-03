@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0;}
+	.wrap{
+		width:970px;
+		height: 150px;
+		border: 1px solid #ccc;
+		margin: 50px auto; 
+		padding: 20px;
+	}
+	.box{
+		width: 150px;
+		height: 150px;
+		border: 1px solid #00ff00;
+		margin-right:40px;
+		float: left;
+		text-align: center;
+		line-height: 150px;
+		font-size: 30px;
+		background: pink;
+	}
+	.newbox{
+		width: 150px;
+		height: 150px;
+		border: 1px dashed red;
+		margin-right:40px;
+		position: absolute;
+		background: #ccc;
+		opacity: 0.5;
+	}
+	.add_box{
+		width: 150px;
+		height: 150px;
+		border: 1px dashed blue;
+		margin-right:40px;
+		float: left;
+	}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.min.js"></script>
+	<div class="wrap">
+		<div class="box">1</div>
+		<div class="box">2</div>
+		<div class="box">3</div>
+		<div class="box">4</div>
+		<div class="box">5</div>
+	</div>
+	<script>
+	$(function(){
+		ismove=false;
+		$(".box").each(function(){	
+			$(this).on("mousedown",function(e){
+				ismove=true;
+				thisdiv=$(this)
+				start={x:0,y:0}
+				zindex={x:0,y:0}
+				
+				start.x=thisdiv.offset().left;
+				start.y=thisdiv.offset().top;
+
+				zindex.x=e.pageX-start.x;
+				zindex.y=e.pageY-start.y;
+
+				thisdiv.attr("class","newbox")
+				thisdiv.css({"left":start.x,"top":start.y})
+				$("<div class='add_box'></div>").insertBefore(thisdiv)
+			})
+		})
+		
+			$(document).on("mousemove",function(e){
+				if(!ismove)return false;
+				var move={x:0,y:0}
+				move.x=e.pageX-zindex.x;
+				move.y=e.pageY-zindex.y;
+
+				thisdiv.css({"left":move.x,"top":move.y})
+
+				var boxs=$(".box");
+
+				boxs.each(function(){
+
+					var that=$(this);
+					
+					var thatle=that.offset().left;
+					var thatw=that.outerWidth()/2;
+					var thatcen=thatle+thatw;
+					var thisdivR=thisdiv.offset().left+thisdiv.outerWidth();
+
+					//向右滑
+					if(thisdivR>=thatcen){
+						$(".add_box").insertAfter(that)
+					}
+					
+					var first=boxs.first();
+					var firstcen=first.offset().left+first.outerWidth()/2;
+					
+					//左侧第一个
+					if(thisdiv.offset().left<=firstcen){
+						$(".add_box").insertBefore(first)
+					}
+				})
+			})
+
+			$(document).on("mouseup",function(){
+			 	if(!ismove)return false;
+			 	thisdiv.insertAfter($(".add_box"))
+			 	thisdiv.attr("class","box")
+			 	$(".add_box").remove();
+			 	ismove=false;
+			})	
+	})
+	
+	</script>
+</body>
+</html>

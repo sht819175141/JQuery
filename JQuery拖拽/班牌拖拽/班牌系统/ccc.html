@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <title>Div Drag/Resize Demo</title>
+  <style type="text/css">
+    .drsElement {
+      position: absolute;
+      border: 1px solid #333;
+    }
+
+    .drsMoveHandle {
+      height: 20px;
+      background-color: #CCC;
+      border-bottom: 1px solid #666;
+      cursor: move;
+    }
+
+    .dragresize {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      font-size: 1px;
+      background: #EEE;
+      border: 1px solid #333;
+    }
+
+
+    .dragresize-tl {
+      top: -8px;
+      left: -8px;
+      cursor: nw-resize;
+    }
+
+    .dragresize-tm {
+      top: -8px;
+      left: 50%;
+      margin-left: -4px;
+      cursor: n-resize;
+    }
+
+    .dragresize-tr {
+      top: -8px;
+      right: -8px;
+      cursor: ne-resize;
+    }
+
+    .dragresize-ml {
+      top: 50%;
+      margin-top: -4px;
+      left: -8px;
+      cursor: w-resize;
+    }
+
+    .dragresize-mr {
+      top: 50%;
+      margin-top: -4px;
+      right: -8px;
+      cursor: e-resize;
+    }
+
+    .dragresize-bl {
+      bottom: -8px;
+      left: -8px;
+      cursor: sw-resize;
+    }
+
+    .dragresize-bm {
+      bottom: -8px;
+      left: 50%;
+      margin-left: -4px;
+      cursor: s-resize;
+    }
+
+    .dragresize-br {
+      bottom: -8px;
+      right: -8px;
+      cursor: se-resize;
+    }
+    .cl{
+      left:100px;
+      top: 200px;
+    }
+    .cls{
+      left:300px;
+      top: 500px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="drsElement drsMoveHandle cl" style="width: 50px; height: 100px;
+background: #DFC; text-align: center">
+    Div 2 Content
+  </div>
+
+  <div class="drsElement drsMoveHandle cls" style="width: 50px; height: 100px;
+background: #DFC; text-align: center">
+    Div 2 Content
+  </div>
+  <script src="js/dragSize.js"></script>
+  <script type="text/javascript">
+    var dragresize = new DragResize('dragresize', {
+      minWidth: 50,
+      minHeight: 50,
+      minLeft: 20,
+      minTop: 20,
+      maxLeft: 1900,
+      maxTop: 950
+    });
+
+    dragresize.isElement = function(elm) {
+      if (elm.className && elm.className.indexOf('drsElement') > -1) return true;
+    };
+
+    dragresize.isHandle = function(elm) {
+      if (elm.className && elm.className.indexOf('drsMoveHandle') > -1) return true;
+    };
+
+    dragresize.ondragfocus = function() {};
+    dragresize.ondragstart = function(isResize) {};
+    dragresize.ondragmove = function(isResize) {};
+    dragresize.ondragend = function(isResize) {};
+    dragresize.ondragblur = function() {};
+    dragresize.apply(document);
+  </script>
+</body>
+
+</html>

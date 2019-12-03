@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="css/baidu.css" /> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #wrap {
+            padding-top: 15px;
+            position: relative;
+        }
+
+        #form {
+            padding-top: 15px;
+        }
+
+        #search {
+            width: 529px;
+            height: 30px;
+            border: 1px solid #6B87B6;
+            font-size: 14px;
+            padding-left: 6px;
+            letter-spacing: 2px;
+            font-family: '微软雅黑';
+            color: #050505;
+        }
+
+        #bd {
+            color: #fff;
+            height: 34px;
+            width: 100px;
+            text-align: center;
+            background: #3385FF;
+            line-height: 35px;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        #a1 {
+            text-decoration: none;
+            color: #081868;
+            display: inline-block;
+        }
+
+        #nav {
+            height: 42px;
+            padding-left: 138px;
+            background: #f8f8f8;
+            margin-top: 15px;
+        }
+
+
+        #ul li a {
+            width: 54px;
+            height: 42px;
+            line-height: 42px;
+            text-align: center;
+            display: block;
+            float: left;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        #ul li a:hover {
+            background: url("img/hover1.jpg") no-repeat;
+            color: #373737;
+            font-weight: bold;
+        }
+
+        #list {
+            width: 534px;
+            float: left;
+            position: absolute;
+            left: 138px;
+            top: 64px;
+            border: 1px solid #CECECE;
+            display: none;
+            background: #fff;
+        }
+
+        #list li {
+            text-indent: 5px;
+            height: 23px;
+            line-height: 23px;
+
+        }
+
+        #list li a:hover {
+            background: #cecece;
+        }
+
+        #list li a {
+            text-decoration: none;
+            display: block;
+            color: #000;
+        }
+
+        #list li.libg {
+            background: #cecece !important;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrap">
+    <div id="info">
+        <img src="img/logo.jpg" alt="" style="float: left">
+    </div>
+    <form id="form">
+        <input type="text" id="search"><label for="" id="bd">百度一下</label>
+        <a href="javascript:;" id="a1">百度浏览器，打开网页快2秒！</a>
+    </form>
+    <div id="nav">
+        <ul id="ul">
+            <li><a href="">网页</a></li>
+            <li><a href="">新闻</a></li>
+            <li><a href="">娱乐</a></li>
+            <li><a href="">体育</a></li>
+            <li><a href="">财经</a></li>
+            <li><a href="">知道</a></li>
+            <li><a href="">贴吧</a></li>
+            <li><a href="">动漫</a></li>
+            <li><a href="">文库</a></li>
+            <li><a href="">更多&gt;&gt;</a></li>
+        </ul>
+    </div>
+    <ul id="list">
+
+    </ul>
+</div>
+<script src="../../jQueryVersion/jquery-2.1.1.js"></script>
+<script src="js/baidu.js"></script>
+
+</body>
+</html>

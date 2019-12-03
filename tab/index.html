@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+	<title>移动端TAB触屏切换效果</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<div id="main">
+		<ul id="pagenavi" class="page">
+	        <li><a href="#" class="active">系统课</a></li>
+	      	<li><a href="#">公开课</a></li>
+	    </ul>
+	    <div id="slider" class="swipe">
+	      <ul class="box01_list">
+		        <li class="li_list">
+					常海涛
+				</li>
+		        <li class="li_list">
+					公开课
+				</li>
+	      </ul>
+	    </div>
+	</div>
+</div>
+<script src="js/zepto_min.js"></script>
+<script src="js/touchslider.js"></script>
+
+<script>
+	var page='pagenavi';
+	var mslide='slider';
+
+	var as=document.getElementById(page).getElementsByTagName('a');
+
+	var touch=new TouchSlider({
+		id:mslide,
+		'auto':'-1',
+		fx:'ease-out',
+		direction:'left',
+		speed:600,
+		timeout:5000,
+		'before':function(index){
+			var as=document.getElementById(this.page).getElementsByTagName('a');
+				as[this.p].className='';
+				as[index].className='active';
+				this.p=index;
+		}
+	});
+
+	touch.page = page;
+	touch.p = 0;
+
+	for(var i=0;i<as.length;i++){
+		(function(){
+			var j=i;
+			as[j].touch = touch;
+			as[j].onclick=function(){
+				this.touch.slide(j);
+				return false;
+			}
+		})();
+	}
+</script>
+</body>
+</html>

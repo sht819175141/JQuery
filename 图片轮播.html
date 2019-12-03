@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		#box {
+			width: 330px;
+			height: 120px;
+			border: 1px solid #000;
+			position: relative;
+			margin: 50px auto;
+			overflow: hidden;
+		}
+
+		#box ul {
+			position: absolute;
+		}
+
+		#box ul li {
+			width: 330px;
+			height: 120px;
+			float: left;
+		}
+
+		#box ol li {
+			width: 20px;
+			height: 20px;
+			background: blue;
+			margin-left: 10px;
+			float: left;
+			color: #fff;
+			line-height: 20px;
+			text-align: center;
+			font-weight: bold;
+			font-size: 15px;
+		}
+
+		#box ol {
+			position: absolute;
+			right: 150px;
+			bottom: 20px;
+		}
+
+		#box #left {
+			width: 30px;
+			height: 80px;
+			position: absolute;
+			left: -5px;
+			top: 180px;
+			cursor: pointer;
+			opacity: 0.3;
+			background: #000;
+			color: #fff;
+			line-height: 80px;
+			font-size: 30px;
+			text-align: center;
+			font-weight: bold;
+		}
+
+		#box #right {
+			width: 30px;
+			height: 80px;
+			font-size: 30px;
+			font-weight: bold;
+			position: absolute;
+			right: -5px;
+			top: 180px;
+			cursor: pointer;
+			color: #fff;
+			line-height: 80px;
+			text-align: center;
+			background: #000;
+			opacity: 0.3;
+		}
+
+		#box .bg {
+			background: red;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="../jQueryVersion/jquery-1.11.1.js"></script>
+	<div id="box">
+		<ul>
+			<li><img src="images/1.png" alt=""></li>
+			<li><img src="images/2.png" alt=""></li>
+			<li><img src="images/3.png" alt=""></li>
+			<li><img src="images/6.png" alt=""></li>
+			<li><img src="images/5.png" alt=""></li>
+		</ul>
+		<ol id="ols">
+			<li class="bg">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>
+	</div>
+	<script>
+		$(function() {
+			var len = $("ul li").length;
+			var index = 0;
+			//自动播的
+			timer = setInterval(auto, 4000)
+
+			function auto() {
+				index++;
+				if (index > len - 1) {
+					index = 0;
+				}
+				img(index)
+			}
+
+			function img(ind) {
+				$("#box li").eq(ind).fadeIn("normal").siblings().fadeOut("normal");
+				//$("#box li").eq(ind).show().siblings().hide();
+				$("#ols li").eq(ind).addClass('bg').siblings().removeClass('bg')
+			}
+
+			//鼠标移上
+			$("#box").hover(function() {
+				clearInterval(timer)
+			}, function() {
+				timer = setInterval(auto, 1000)
+			})
+
+			//ols li
+			$("#ols li").on("mouseover", function() {
+				var sum = $(this).index();
+				img(sum)
+			})
+
+		})
+	</script>
+</body>
+
+</html>

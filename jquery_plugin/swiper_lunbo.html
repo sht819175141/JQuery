@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .swiper_lunbo {
+            width: 730px;
+            height: 454px;
+            overflow: hidden;
+            position: relative;
+            margin: 100px auto;
+        }
+
+        .swiper_lunbo .swiper_wrape {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        .swiper_lunbo .slide {
+            width: 100%;
+            height: 100%;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="swiper_lunbo">
+        <div class="swiper_wrape">
+            <div class="slide"><img src="../../images/1.jpg" alt=""></div>
+            <div class="slide"><img src="../../images/2.jpg" alt=""></div>
+            <div class="slide"><img src="../../images/3.jpg" alt=""></div>
+            <div class="slide"><img src="../../images/4.jpg" alt=""></div>
+            <div class="slide"><img src="../../images/5.jpg" alt=""></div>
+        </div>
+    </div>
+    <script src="../../jQueryVersion/jquery-1.11.1.js"></script>
+    <script src="swiper_lunbo.js"></script>
+    <script>
+        $(".swiper_lunbo").swiper_lunbo({
+            'type': 'fade',
+            'initindex': 0,
+            'speed': 5000,
+            'autoPlay': true
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		*{margin:0;padding:0;}
+		#box{width:1060px;height:120px;border:1px solid #ccc;overflow: hidden;position: relative;}
+		#box img{width:330px;height:120px;float:left;position: absolute;} 
+		#box .last{right: 0;}
+	</style>
+</head>
+<body>
+	<script src="jq/jquery-2.1.1.min.js"></script>
+	<div id="box">
+			<img src="images/1.png" />
+			<img src="images/2.png" />
+			<img src="images/3.png" />
+			<img src="images/1.png" />
+			<img src="images/5.png" />
+			<img src="images/6.png" />
+			<img src="images/1.png" />
+			<img src="images/2.png" />
+			<img src="images/3.png" />
+			<img src="images/2.png" class="last"/>							
+	</div>
+	<script>
+	$(document).ready(function(){
+		$("#box :not(.last)").each(function(i){
+			if (i==0){
+				$(this).css("margin-left",0);
+			}else{
+				$(this).css("margin-left",(i-1)*50+330);
+			}
+		})
+		//除了最后一张，剩下的命名为imgs
+		var imgs=$('img').not('.last');
+		var cm=50;
+		var bow=660+(imgs.length-1)*cm;
+			//console.log(bow)
+		$("img").on("mouseover",function(){
+			//如果不加1的话，这张图片本身是不会动的，加上1以后，你所滑的的这张图片，才会和除了第一张到本身这张图片，一起动。
+			result=imgs.slice(1,$(this).index()+1)
+			result.stop().animate({"left":-330+cm})
+			//除了第一张，最后一张，以及向左滑动几张，剩下的就是这些，这些向右归0
+			imgs.not(result).stop().animate({"left":0})
+		})	
+	})
+	</script>
+</body>
+</html>
