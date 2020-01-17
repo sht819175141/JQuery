@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>jsTree test</title>
+	<link rel="stylesheet" href="dist/themes/default/style.min.css" />
+</head>
+
+<body>
+	<div id="jstree">
+		<ul>
+			<li>公司名称</li>
+			<li>一级部门名称
+				<ul>
+					<li id="child_node_1">一级部门名称 1</li>
+					<li>一级部门名称 2</li>
+				</ul>
+
+			</li>
+			<li>二级部门名称</li>
+		</ul>
+	</div>
+	<button>点击</button>
+	<script src="dist/jquery-3.1.1.min.js"></script>
+	<script src="dist/jstree.min.js"></script>
+	<script>
+		$(function () {
+			$('#jstree').jstree();
+			/*$('#jstree').on("changed.jstree", function (e, data) {
+	      	console.log(data.selected);
+	    });
+	    $('button').on('click', function () {
+		    $('#jstree').jstree(true).select_node('child_node_1');
+		    $('#jstree').jstree('select_node', 'child_node_1');
+		    $.jstree.reference('#jstree').select_node('child_node_1');
+	    });*/
+		});
+	</script>
+</body>
+
+</html>
